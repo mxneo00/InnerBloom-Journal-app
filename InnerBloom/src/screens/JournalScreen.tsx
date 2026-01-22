@@ -13,6 +13,8 @@ type Props = {
 // - Filter by tags or categories
 // - Edit and delete entries
 
+// Change ScrollView to FlatList for better performance with many entries
+
 export default function JournalScreen({ entries }: Props) {
   return (
     <ScrollView contentContainerStyle={styles.entryContainer}>
