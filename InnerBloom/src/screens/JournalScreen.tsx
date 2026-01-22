@@ -17,15 +17,17 @@ type Props = {
 
 export default function JournalScreen({ entries }: Props) {
   return (
-    <ScrollView contentContainerStyle={styles.entryContainer}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Journal Entries</Text>
 
-      {entries.length === 0 && (
-        <Text style={styles.text}>No entries yet.</Text>
-      )}
-
+      <View style={styles.card}>
+        {entries.length === 0 && (
+          <Text style={styles.text}>No entries yet.</Text>
+        )}
+      </View>
+      
       {entries.map((entry, index) => (
-        <View key={entry.id} style={styles.entryItem}>
+        <View key={entry.id} style={styles.card}>
           <Text style={styles.entryLabel}>Entry {index + 1}:</Text>
           <Text>{entry.content}</Text>
         </View>

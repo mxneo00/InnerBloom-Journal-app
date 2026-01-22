@@ -16,11 +16,6 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
   },
-  entryContainer: {
-    flexGrow: 1,
-    padding: 16,
-    backgroundColor: '#fff',
-  },
   title: {
     fontSize: 26,
     fontWeight: 'bold',
