@@ -15,9 +15,11 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to InnerBloom</Text>
+      {/* Customized welcome message */}
+      <Text style={styles.title}>Welcome back!</Text>
+      {/* Display current date */}
       <View style={styles.card}>
-        {/* Current Mood Display WIP */}
+        {/* Current Mood Display WIP  (Display side by side) */}
         <Text style={styles.text}>Current Mood</Text>
         <Pressable style={styles.buttonContainer} onPress={() => {handleMoodPress}}>
           <Text style={styles.buttonText}>😊</Text>
@@ -34,6 +36,7 @@ export default function HomeScreen() {
         <Text style={styles.text}>WIP</Text>
       </View>
       <View style={styles.card}>
+        {/* Summary of habits or streaks  (Make functional) */}
         <Text style={styles.text}>You've checked in # days in a row!</Text>
       </View>
     </View>
