@@ -7,6 +7,12 @@ type Props = {
   entries: Entry[];
 };
 
+// Features to add:
+// - Entry date display
+// - Search functionality
+// - Filter by tags or categories
+// - Edit and delete entries
+
 export default function JournalScreen({ entries }: Props) {
   return (
     <ScrollView contentContainerStyle={styles.entryContainer}>

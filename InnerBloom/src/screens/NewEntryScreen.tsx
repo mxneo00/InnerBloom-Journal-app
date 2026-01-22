@@ -11,6 +11,7 @@ type Props = {
 export default function NewEntryScreen({ entries, setEntries }: Props) {
   const [text, setText] = useState('');
 
+  // Add auto swap to journal screen after save
   const handleSave = () => {
     if (text.trim() === '') return;
 

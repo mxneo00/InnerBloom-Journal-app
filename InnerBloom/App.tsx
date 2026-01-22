@@ -6,6 +6,7 @@ import { enableScreens } from 'react-native-screens';
 import HomeScreen from './src/screens/HomeScreen';
 import JournalScreen from './src/screens/JournalScreen';
 import NewEntryScreen from './src/screens/NewEntryScreen';
+import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import { Entry } from './src/types/entry';
 
 enableScreens(false);
@@ -14,6 +15,7 @@ type RootParamList = {
   Home: undefined;
   Journal: undefined;
   NewEntry: undefined;
+  HabitTracker: undefined;
 };
 
 const Tab = createBottomTabNavigator<RootParamList>();
@@ -38,6 +40,9 @@ export default function App() {
             />
           )}
         </Tab.Screen>
+
+        <Tab.Screen name="HabitTracker" component={HabitTrackerScreen} />
+
       </Tab.Navigator>
     </NavigationContainer>
   );
