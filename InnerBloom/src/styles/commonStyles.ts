@@ -36,6 +36,9 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 8,
   },
+  buttonText: {
+    fontSize: 24,
+  },
   entryItem: {
     marginBottom: 12,
   },
