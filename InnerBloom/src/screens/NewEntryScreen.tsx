@@ -24,19 +24,22 @@ export default function NewEntryScreen({ entries, setEntries }: Props) {
   };
 
   return (
-    <View style={styles.entryContainer}>
-      <Text style={styles.title}>New Journal Entry</Text>
+    <View style={styles.container}>
+      {/* Make into a card element */}
+      <View style={styles.entryContainer}>
+        <Text style={styles.title}>New Journal Entry</Text>
 
-      <TextInput
-        placeholder="Write something..."
-        value={text}
-        onChangeText={setText}
-        multiline
-        style={styles.input}
-      />
+        <TextInput
+          placeholder="Write something..."
+          value={text}
+          onChangeText={setText}
+          multiline
+          style={styles.input}
+        />
 
-      <View style={styles.buttonContainer}>
-        <Button title="Save Entry" onPress={handleSave} />
+        <View style={styles.buttonContainer}>
+          <Button title="Save Entry" onPress={handleSave} />
+        </View>
       </View>
     </View>
   );
