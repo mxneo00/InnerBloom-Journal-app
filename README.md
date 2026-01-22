@@ -81,6 +81,8 @@ This app combines journaling and habit tracking into a single, easy-to-use mobil
 - Calendar view
 - Mood tracking
 - Categories & tags
+- Custom themes
+- Customizable journal entries
 
 ---
 
