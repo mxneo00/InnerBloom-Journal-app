@@ -8,6 +8,14 @@ export const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#F3F7F4',
   },
+  card: {
+    backgroundColor: '#d6f9df',
+    borderRadius: 8,
+    padding: 16,
+    shadowColor: '#577568',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+  },
   entryContainer: {
     flexGrow: 1,
     padding: 16,
