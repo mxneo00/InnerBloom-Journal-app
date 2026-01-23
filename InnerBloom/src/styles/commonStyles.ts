@@ -3,18 +3,26 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
+    padding: 20,
     backgroundColor: '#F3F7F4',
   },
+  header: {
+    marginBottom: 24,
+  },
+  date: {
+    fontSize: 14,
+    color: '#7A8A8A',
+  },
   card: {
-    backgroundColor: '#d6f9df',
-    borderRadius: 8,
-    padding: 16,
+    backgroundColor: '#d6f9df', 
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 24,
     shadowColor: '#577568',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 3,
   },
   title: {
     fontSize: 26,
@@ -44,5 +52,28 @@ export const styles = StyleSheet.create({
   },
   entryLabel: {
     fontWeight: 'bold',
+  },
+  moodContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 12,
+  },
+  moodButton: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#d6f9df',
+  },
+  moodButtonSelected: {
+    backgroundColor: '#b2d3c5',
+  },
+  moodButtonPressed: {
+    opacity: 0.85,
+    transform: [{ scale: 0.96 }],
+  },
+  emoji: {
+    fontSize: 26,
   },
 });
