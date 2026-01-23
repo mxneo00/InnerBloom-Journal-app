@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { styles } from '../styles/commonStyles';
 
+import { Mood } from '../types/mood';
+
 // Features to add: 
 // - Current date display
 // - Quick tips for journaling
 // - Number of entries summary
-
-type Mood = 'Happy' | 'Sad' | 'Anxious' | 'Excited' | 'Calm';
 
 const MOODS: { key: Mood; emoji: string }[] = [
   { key: 'Happy', emoji: '😊' },
@@ -20,7 +20,6 @@ const MOODS: { key: Mood; emoji: string }[] = [
 
 export default function HomeScreen() {
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
-
 
   return (
     <View style={styles.container}>
