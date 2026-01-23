@@ -13,7 +13,6 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "jsEngine": "jsc",
       "supportsTablet": true
     },
     "android": {
@@ -22,12 +21,11 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "jsEngine": "jsc",
-      "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.InnerBloom"
+      "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "jsEngine": "jsc"
   }
 }

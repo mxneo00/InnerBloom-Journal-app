@@ -4,12 +4,9 @@ import { Entry } from '../types/entry';
 import { styles } from '../styles/commonStyles';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { enableScreens } from 'react-native-screens';
 
 import { Mood } from '../types/mood';
 import { JournalStackParamList } from '../../App';
-
-enableScreens(false);
 
 type Props = {
   entries: Entry[];
@@ -20,7 +17,7 @@ type JournalScreenNavigationProp = NativeStackNavigationProp<
   'JournalMain'
 >;
 
-export default function JournalScreen({ entries }: Props) {
+export default function JournalScreen({ entries = [] }: Props) {
   const navigation = useNavigation<JournalScreenNavigationProp>();
 
   return (

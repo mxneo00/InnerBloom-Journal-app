@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { enableScreens } from 'react-native-screens';
 
 import HomeScreen from './src/screens/HomeScreen';
 import JournalScreen from './src/screens/JournalScreen';
@@ -10,8 +9,6 @@ import { ViewEntryScreen } from './src/screens/ViewEntryScreen';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import { Entry } from './src/types/entry';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-enableScreens(false);
 
 type TabParamList = {
   Home: undefined;
@@ -34,7 +31,7 @@ export default function App() {
   function JournalStack() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="JournalMain" options={{ headerShown: false }}>
+        <Stack.Screen name="JournalMain">
           {() => <JournalScreen entries={entries} />}
         </Stack.Screen>
         <Stack.Screen name="NewEntry">
