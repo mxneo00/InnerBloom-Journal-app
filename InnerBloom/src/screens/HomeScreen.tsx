@@ -5,11 +5,6 @@ import { styles } from '../styles/commonStyles';
 
 import { Mood } from '../types/mood';
 
-// Features to add: 
-// - Current date display
-// - Quick tips for journaling
-// - Number of entries summary
-
 const MOODS: { key: Mood; emoji: string }[] = [
   { key: 'Happy', emoji: '😊' },
   { key: 'Sad', emoji: '😢' },
