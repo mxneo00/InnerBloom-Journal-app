@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { enableScreens } from 'react-native-screens';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './src/screens/HomeScreen';
 import JournalScreen from './src/screens/JournalScreen';
@@ -8,7 +10,8 @@ import NewEntryScreen from './src/screens/NewEntryScreen';
 import { ViewEntryScreen } from './src/screens/ViewEntryScreen';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import { Entry } from './src/types/entry';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+enableScreens(false);
 
 type TabParamList = {
   Home: undefined;
@@ -23,7 +26,8 @@ export type JournalStackParamList = {
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
-const Stack = createNativeStackNavigator<JournalStackParamList>();
+const Stack = createStackNavigator<JournalStackParamList>();
+
 
 export default function App() {
   const [entries, setEntries] = useState<Entry[]>([]);

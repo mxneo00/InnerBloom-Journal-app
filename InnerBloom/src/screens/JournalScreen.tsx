@@ -8,6 +8,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Mood } from '../types/mood';
 import { JournalStackParamList } from '../../App';
 
+
 type Props = {
   entries: Entry[];
 };
