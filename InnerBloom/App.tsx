@@ -6,40 +6,50 @@ import { enableScreens } from 'react-native-screens';
 import HomeScreen from './src/screens/HomeScreen';
 import JournalScreen from './src/screens/JournalScreen';
 import NewEntryScreen from './src/screens/NewEntryScreen';
+import { ViewEntryScreen } from './src/screens/ViewEntryScreen';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import { Entry } from './src/types/entry';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 enableScreens(false);
 
-type RootParamList = {
+type TabParamList = {
   Home: undefined;
   Journal: undefined;
-  NewEntry: undefined;
   HabitTracker: undefined;
 };
 
-const Tab = createBottomTabNavigator<RootParamList>();
+export type JournalStackParamList = {
+  JournalMain: undefined;
+  NewEntry: undefined;
+  ViewEntry: { entry: Entry };
+};
+
+const Tab = createBottomTabNavigator<TabParamList>();
+const Stack = createNativeStackNavigator<JournalStackParamList>();
 
 export default function App() {
   const [entries, setEntries] = useState<Entry[]>([]);
+
+  function JournalStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="JournalMain" options={{ headerShown: false }}>
+          {() => <JournalScreen entries={entries} />}
+        </Stack.Screen>
+        <Stack.Screen name="NewEntry">
+          {() => <NewEntryScreen entries={entries} setEntries={setEntries} />}
+        </Stack.Screen>
+        <Stack.Screen name="ViewEntry" component={ViewEntryScreen} />
+      </Stack.Navigator>
+    );}
 
   return (
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
 
-        <Tab.Screen name="Journal">
-          {() => <JournalScreen entries={entries} />}
-        </Tab.Screen>
-
-        <Tab.Screen name="NewEntry">
-          {() => (
-            <NewEntryScreen
-              entries={entries}
-              setEntries={setEntries}
-            />
-          )}
-        </Tab.Screen>
+        <Tab.Screen name="Journal" component={JournalStack}/>
 
         <Tab.Screen name="HabitTracker" component={HabitTrackerScreen} />
 

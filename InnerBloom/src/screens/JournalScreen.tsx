@@ -2,15 +2,27 @@ import React from 'react';
 import { Text, View, FlatList, Pressable } from 'react-native';
 import { Entry } from '../types/entry';
 import { styles } from '../styles/commonStyles';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { enableScreens } from 'react-native-screens';
 
 import { Mood } from '../types/mood';
-import { ViewEntryScreen } from './ViewEntryScreen';
+import { JournalStackParamList } from '../../App';
+
+enableScreens(false);
 
 type Props = {
   entries: Entry[];
 };
 
+type JournalScreenNavigationProp = NativeStackNavigationProp<
+  JournalStackParamList,
+  'JournalMain'
+>;
+
 export default function JournalScreen({ entries }: Props) {
+  const navigation = useNavigation<JournalScreenNavigationProp>();
+
   return (
     <View style={styles.container}>
       <View style={styles.journalHeader}>
@@ -21,9 +33,7 @@ export default function JournalScreen({ entries }: Props) {
         </View>
 
         {/* Add new entry button */}
-        <Pressable onPress={() => {
-          // New entry nav
-        }} style={styles.addButton}>
+        <Pressable onPress={() => navigation.navigate('NewEntry')} style={styles.addButton}>
           <Text style={styles.addButtonText}>+</Text>
         </Pressable>
       </View>
@@ -44,9 +54,7 @@ export default function JournalScreen({ entries }: Props) {
           </View>
         )}
         renderItem={({item, index}) => (
-          <Pressable onPress={() => {
-            // EntryScreen Nav
-          }}>
+          <Pressable onPress={() => navigation.navigate('ViewEntry', { entry: item })}>
             <View style={styles.card}>
               <Text style={styles.journalEntryLabel}>Entry {index + 1}</Text>
               <Text numberOfLines={2}>{item.content}</Text>
