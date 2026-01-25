@@ -18,9 +18,9 @@ enableScreens(false);
 
 type TabParamList = {
   Home: undefined;
-  //Journal: undefined;
-  OldJournal: undefined;
-  NewEntry: undefined;
+  Journal: undefined;
+  //OldJournal: undefined;
+  //NewEntry: undefined;
   HabitTracker: undefined;
 };
 
@@ -55,8 +55,8 @@ export default function App() {
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
 
-        {/*<Tab.Screen name="Journal" component={JournalStack}/>*/}
-        <Tab.Screen name="OldJournal">
+        <Tab.Screen name="Journal" component={JournalStack}/>
+        {/*<Tab.Screen name="OldJournal">
           {() => <OldJournalScreen entries={entries} />}
         </Tab.Screen>
 
@@ -67,7 +67,7 @@ export default function App() {
               setEntries={setEntries}
             />
           )}
-        </Tab.Screen>
+        </Tab.Screen> */}
 
         <Tab.Screen name="HabitTracker" component={HabitTrackerScreen} />
 
