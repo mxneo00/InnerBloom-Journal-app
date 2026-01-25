@@ -61,18 +61,6 @@ export default function App() {
         <Tab.Screen name="Home" component={HomeScreen} />
 
         <Tab.Screen name="Journal" component={JournalStack}/>
-        {/*<Tab.Screen name="OldJournal">
-          {() => <OldJournalScreen entries={entries} />}
-        </Tab.Screen>
-
-        <Tab.Screen name="NewEntry">
-          {() => (
-            <NewEntryScreen
-              entries={entries}
-              setEntries={setEntries}
-            />
-          )}
-        </Tab.Screen> */}
 
         <Tab.Screen name="HabitTracker" component={HabitTrackerScreen} />
 

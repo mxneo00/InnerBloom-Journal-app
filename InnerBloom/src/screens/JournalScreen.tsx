@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View, FlatList, Pressable } from 'react-native';
 import { Entry } from '../types/entry';
 import { styles } from '../styles/commonStyles';
-import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Mood } from '../types/mood';
@@ -22,7 +21,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
       <View style={styles.journalHeader}>
         <View style={styles.headerTextContainer}>
           <Text style={styles.title}>Your Journal Entries</Text>
-          {/* Summary of total entries */}
+          {/* Summary of total entries WIP */}
           <Text style={styles.entryCount}>Entries: #</Text>
         </View>
 
@@ -35,6 +34,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
       {/* Search bar placeholder (Add filtering later) */}
       <View style={styles.searchContainer}>
         {/* Search bar can be implemented here in the future */}
+        <Text style={styles.text}>Search bar WIP</Text>
       </View>
       
       {/* List of journal entries */}
