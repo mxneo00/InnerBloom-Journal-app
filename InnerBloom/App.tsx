@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { enableScreens } from 'react-native-screens';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './src/screens/HomeScreen';
 import JournalScreen from './src/screens/JournalScreen';
@@ -31,7 +31,7 @@ export type JournalStackParamList = {
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
-const Stack = createStackNavigator<JournalStackParamList>();
+const Stack = createNativeStackNavigator<JournalStackParamList>();
 
 
 export default function App() {
@@ -41,7 +41,12 @@ export default function App() {
     return (
       <Stack.Navigator>
         <Stack.Screen name="JournalMain">
-          {() => <JournalScreen entries={entries} />}
+          {(props) => (
+            <JournalScreen
+              {...props}
+              entries={entries}
+            />
+          )}
         </Stack.Screen>
         <Stack.Screen name="NewEntry">
           {() => <NewEntryScreen entries={entries} setEntries={setEntries} />}
