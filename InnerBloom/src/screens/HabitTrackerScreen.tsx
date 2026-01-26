@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 
 // SRC Imports
 import { styles } from '../styles/commonStyles';
 import { habitStyles } from '../styles/habitTrackerScreenStyles';
+import DailyHabitRow from '../screens/DailyHabitRow';
+import WeeklyHabitRow from '../screens/WeeklyHabitRow';
+import type { Habit } from '../types/habit';
+
+const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 function toDateKey(date: Date): string {
     const year = date.getFullYear();
@@ -26,6 +31,40 @@ function getCurrentWeekDates(): Date[] {
 }
 
 export default function HabitTrackerScreen() {
+  const [habits, setHabits] = useState<Habit[]>([]);
+  
+  const weekDates = useMemo(() => getCurrentWeekDates(), []);
+  const weekDateKeys = useMemo(() => weekDates.map(toDateKey), [weekDates]);
+  const weekKey = useMemo(() => toDateKey(weekDates[0]), [weekDates]);
+
+  const dailyHabits = habits.filter((h) => h.frequency === 'daily');
+  const weeklyHabits = habits.filter((h) => h.frequency === 'weekly');
+
+  const onToggleDailyCompletion = (habitId: string, dateKey: string) => {
+    setHabits((prev) =>
+      prev.map((h) => {
+        if (h.id !== habitId) return h;
+        const current = !!h.completionsByDate?.[dateKey];
+        return {
+          ...h,
+          completionsByDate: {
+            ...(h.completionsByDate ?? {}),
+            [dateKey]: !current,
+          },
+        };
+      })
+    );
+  };
+
+  const onToggleWeeklyCompletion = (habitId: string) => {
+    setHabits((prev) =>
+      prev.map((h) => {
+        if (h.id !== habitId) return h;
+        return {...h, weeklyCompletion: !h.weeklyCompletion};
+      })
+    );
+  };
+
   return (
     <View style={styles.container}>
       {/* Header Section */}
@@ -42,17 +81,49 @@ export default function HabitTrackerScreen() {
       <View style={styles.card}>
         {/* Daily Header */}
         <View style={habitStyles.dailyHeader}>
-          <Text style={habitStyles.dailyHeaderText}>Daily habits section</Text>
+          <Text style={habitStyles.dailyHeaderText}>Daily habits</Text>
         </View>
-        {/* Daily Habits Row */}
+        {/* Day Labels */}
+        <View style={habitStyles.dayHeaderRow}>
+          {DAY_LABELS.map((d, idx) => (
+            <Text key={`${d}-${idx}`} style={habitStyles.dayHeaderText}>
+              {d}
+            </Text>
+          ))}
+        </View>
+        {/* Rows */}
+        {dailyHabits.length === 0 ? (
+          <Text style={habitStyles.emptyText}>No daily habits yet.</Text>
+        ) : (
+          dailyHabits.map((habit) => (
+            <DailyHabitRow
+              key={habit.id}
+              habit={habit}
+              weekDateKeys={weekDateKeys}
+              onToggleDailyCompletion={onToggleDailyCompletion}
+            />
+          ))
+        )}
       </View>
-      
-      {/* Weely Habit Section */}
+
+      {/* Weekly Habit Section */}
       <View style={styles.card}>
-        {/* Weekly Header */}
         <View style={habitStyles.weeklyHeader}>
-          <Text style={habitStyles.weeklyHeaderText}>Weekly habits section</Text>
+          <Text style={habitStyles.weeklyHeaderText}>Weekly Habits</Text>
         </View>
+
+        {weeklyHabits.length === 0 ? (
+          <Text style={habitStyles.emptyText}>No weekly habits yet.</Text>
+        ) : (
+          weeklyHabits.map((habit) => (
+            <WeeklyHabitRow
+              key={habit.id}
+              habit={habit}
+              checked={!!habit.weeklyCompletion}
+              onToggleWeeklyCompletion={onToggleWeeklyCompletion}
+            />
+          ))
+        )}
       </View>
     </View>
   );

@@ -64,4 +64,68 @@ export const habitStyles = StyleSheet.create({
     padding: 10,
     marginBottom: 12,
   },
+  dayHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 12,
+    paddingTop: 8,
+    paddingBottom: 6,
+    gap: 12,
+  },
+  dayHeaderText: {
+    width: 18,
+    textAlign: 'center',
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#6B7280',
+  },
+  habitRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  habitName: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#111827',
+    marginRight: 10,
+  },
+  dayBoxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  dayBox: {
+    width: 18,
+    height: 18,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    backgroundColor: '#FFFFFF',
+  },
+  dayBoxChecked: {
+    backgroundColor: '#10B981',
+    borderColor: '#10B981',
+  },
+  weeklyBox: {
+    width: 22,
+    height: 22,
+    borderRadius: 7,
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    backgroundColor: '#FFFFFF',
+  },
+  weeklyBoxChecked: {
+    backgroundColor: '#10B981',
+    borderColor: '#10B981',
+  },
+  emptyText: {
+    paddingVertical: 16,
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#9CA3AF',
+  },
+
 });

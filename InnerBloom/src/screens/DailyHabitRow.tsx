@@ -4,27 +4,31 @@ import { Pressable, Text, View } from 'react-native';
 // SRC Imports
 import { styles } from '../styles/commonStyles';
 import { habitStyles } from '../styles/habitTrackerScreenStyles';
-import type { habit } from '../types/habit';
+import type { Habit } from '../types/habit';
 
 type Props = {
-    habit: habit;
+    habit: Habit;
+    weekDateKeys: string[];
     onToggleDailyCompletion: (habitId: string, date: string) => void;
-    onToggleWeeklyCompletion: (habitId: string) => void;
 };
 
-export default function DailyHabitRow({ habit, onToggleDailyCompletion, onToggleWeeklyCompletion }: Props) {
-    const isDaily = habit.frequency === 'daily';
-
+export default function DailyHabitRow({ habit, weekDateKeys, onToggleDailyCompletion }: Props) {
     return (
         <View style={habitStyles.habitRow}>
             <Text style={habitStyles.habitName}>{habit.name}</Text>
-            {isDaily ? (
-                <View style={habitStyles.dayBoxContainer}>
-                    
-                </View>
-            ) : (
-
-            )}
+            
+            <View style={habitStyles.dayBoxContainer}>
+                {weekDateKeys.map((dateKey) => {
+                    const checked = !!habit.completionsByDate?.[dateKey];
+                    return (
+                        <Pressable 
+                            key={dateKey} 
+                            onPress={() => onToggleDailyCompletion(habit.id, dateKey)}
+                            style={[habitStyles.dayBox, checked && habitStyles.dayBoxChecked,]}
+                        />
+                    );
+                })}
+            </View>
         </View>
     );
 }

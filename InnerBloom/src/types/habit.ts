@@ -1,4 +1,4 @@
-export type habit = {
+export type Habit = {
     id: string;
     name: string;
     frequency: 'daily' | 'weekly';
