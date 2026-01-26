@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import type { Dispatch, SetStateAction } from 'react';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -80,8 +79,8 @@ export default function HabitTrackerScreen({ habits, setHabits, navigation }: Pr
       {/* Header Section */}
       <View style={habitStyles.habitHeader}>
         <Text style={habitStyles.habitHeaderText}>This Weeks Habits</Text>
-        <Text style={habitStyles.daterange}>Date1 - Date2</Text>
-        <Text style={habitStyles.progress}>Progress: 12/21</Text>
+        <Text style={habitStyles.daterange}>{weekDateKeys[0]} : {weekDateKeys[6]}</Text>
+        {/*<Text style={habitStyles.progress}>Progress: 12/21</Text>*/}
         <Pressable onPress={() => navigation.navigate('AddHabit')} style={habitStyles.addHabitButton}>
           <Text style={habitStyles.addHabitButtonText}>+ Add Habit</Text>
         </Pressable>

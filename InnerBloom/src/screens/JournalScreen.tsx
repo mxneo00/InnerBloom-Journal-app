@@ -23,7 +23,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
       <View style={journalStyles.journalHeader}>
         <View style={journalStyles.headerTextContainer}>
           <Text style={styles.title}>Your Journal Entries</Text>
-          {/* Summary of total entries WIP */}
+          {/* Summary of total entries */}
           <Text style={journalStyles.entryCount}>Entries: {entries.length}</Text>
         </View>
 
