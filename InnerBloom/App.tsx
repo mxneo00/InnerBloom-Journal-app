@@ -9,7 +9,9 @@ import JournalScreen from './src/screens/JournalScreen';
 import NewEntryScreen from './src/screens/NewEntryScreen';
 import { ViewEntryScreen } from './src/screens/ViewEntryScreen';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
+import AddHabitScreen from './src/screens/AddHabitScreen';
 import { Entry } from './src/types/entry';
+import { Habit } from './src/types/habit';
 
 type TabParamList = {
   Home: undefined;
@@ -23,31 +25,52 @@ export type JournalStackParamList = {
   ViewEntry: { entry: Entry };
 };
 
+export type HabitStackParamList = {
+  HabitMain: undefined;
+  AddHabit: undefined;
+}
+
 const Tab = createBottomTabNavigator<TabParamList>();
-const Stack = createNativeStackNavigator<JournalStackParamList>();
+const journalStack = createNativeStackNavigator<JournalStackParamList>();
+const habitStack = createNativeStackNavigator<HabitStackParamList>();
 
 export default function App() {
   const [entries, setEntries] = useState<Entry[]>([]);
+  const [habits, setHabits] = useState<Habit[]>([]);
 
   function JournalStack() {
     return (
-      <Stack.Navigator>
-        <Stack.Screen name="JournalMain" options={{ headerShown: false }}>
+      <journalStack.Navigator>
+        <journalStack.Screen name="JournalMain" options={{ headerShown: false }}>
           {(props) => ( <JournalScreen {...props} entries={entries}/>)}
-        </Stack.Screen>
-        <Stack.Screen name="NewEntry" options={{ title: 'New Journal Entry' }}>
+        </journalStack.Screen>
+        <journalStack.Screen name="NewEntry" options={{ title: 'New Journal Entry' }}>
           {() => <NewEntryScreen entries={entries} setEntries={setEntries} />}
-        </Stack.Screen>
-        <Stack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'View Entry' }}/>
-      </Stack.Navigator>
-    );}
+        </journalStack.Screen>
+        <journalStack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'View Entry' }}/>
+      </journalStack.Navigator>
+    );
+  }
+
+  function HabitStack() {
+    return (
+      <habitStack.Navigator>
+        <habitStack.Screen name="HabitMain" options={{ headerShown: false }}>
+          {(props) => <HabitTrackerScreen {...props} habits={habits} setHabits={setHabits} />}
+        </habitStack.Screen>
+        <habitStack.Screen name="AddHabit" options={{ title: 'Add Habit' }}>
+          {(props) => <AddHabitScreen {...props} habits={habits} setHabits={setHabits} />}
+        </habitStack.Screen>
+      </habitStack.Navigator>
+    );
+  }
 
   return (
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Journal" component={JournalStack}/>
-        <Tab.Screen name="HabitTracker" component={HabitTrackerScreen} />
+        <Tab.Screen name="HabitTracker" component={HabitStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );

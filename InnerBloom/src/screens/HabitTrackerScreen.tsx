@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
+import type { Dispatch, SetStateAction } from 'react';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // SRC Imports
 import { styles } from '../styles/commonStyles';
@@ -8,8 +10,18 @@ import { habitStyles } from '../styles/habitTrackerScreenStyles';
 import DailyHabitRow from '../screens/DailyHabitRow';
 import WeeklyHabitRow from '../screens/WeeklyHabitRow';
 import type { Habit } from '../types/habit';
+import { HabitStackParamList } from '../../App';
 
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+type Props = {
+  habits: Habit[];
+  setHabits: Dispatch<SetStateAction<Habit[]>>;
+  navigation: NativeStackNavigationProp<
+      HabitStackParamList,
+      'HabitMain'
+    >;
+};
 
 function toDateKey(date: Date): string {
     const year = date.getFullYear();
@@ -30,9 +42,7 @@ function getCurrentWeekDates(): Date[] {
     return weekDates;
 }
 
-export default function HabitTrackerScreen() {
-  const [habits, setHabits] = useState<Habit[]>([]);
-  
+export default function HabitTrackerScreen({ habits, setHabits, navigation }: Props) {
   const weekDates = useMemo(() => getCurrentWeekDates(), []);
   const weekDateKeys = useMemo(() => weekDates.map(toDateKey), [weekDates]);
   const weekKey = useMemo(() => toDateKey(weekDates[0]), [weekDates]);
@@ -72,7 +82,7 @@ export default function HabitTrackerScreen() {
         <Text style={habitStyles.habitHeaderText}>This Weeks Habits</Text>
         <Text style={habitStyles.daterange}>Date1 - Date2</Text>
         <Text style={habitStyles.progress}>Progress: 12/21</Text>
-        <Pressable style={habitStyles.addHabitButton}>
+        <Pressable onPress={() => navigation.navigate('AddHabit')} style={habitStyles.addHabitButton}>
           <Text style={habitStyles.addHabitButtonText}>+ Add Habit</Text>
         </Pressable>
       </View>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {Pressable, Button, TextInput, View, Text } from 'react-native';
+import type { Dispatch, SetStateAction } from 'react';
 
 // SRC Imports
 import { Habit } from '../types/habit';
@@ -7,11 +8,11 @@ import { styles } from '../styles/commonStyles';
 import { habitStyles as habitStyles } from '../styles/habitTrackerScreenStyles';
 
 type Props = {
-  addHabit: (habit: Habit) => void;
-  goBack: () => void
+  habits: Habit[];
+  setHabits: Dispatch<SetStateAction<Habit[]>>;
 };
 
-export default function AddHabitScreen({ addHabit, goBack }: Props) {
+export default function AddHabitScreen({ habits, setHabits }: Props) {
   const [name, setName] = useState('');
   const [frequency, setFrequency] = useState<'daily' | 'weekly'>('daily');
 
@@ -19,14 +20,19 @@ export default function AddHabitScreen({ addHabit, goBack }: Props) {
     const trimmed = name.trim();
     if (!trimmed) return;
 
-    addHabit({
-      id: Date.now().toString(),
-      name: trimmed,
-      frequency,
-      completionsByDate: {},
-      weeklyCompletion: false,
-    });
-    goBack();
+    setHabits(prev => [
+      ...prev,
+      {
+        id: Date.now().toString(),
+        name: trimmed,
+        frequency,
+        completionsByDate: {},
+        weeklyCompletion: false,
+      },
+    ]);
+
+    setName('');
+    setFrequency('daily');
   };
 
     return (
