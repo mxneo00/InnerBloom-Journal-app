@@ -2,9 +2,11 @@ import React from 'react';
 import { Text, View, FlatList, Pressable } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+// SRC Imports
 import { Mood } from '../types/mood';
 import { JournalStackParamList } from '../../App';
 import { Entry } from '../types/entry';
+import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';
 import { styles } from '../styles/commonStyles';
 
 type Props = {
@@ -22,17 +24,17 @@ export default function JournalScreen({ entries, navigation }: Props) {
         <View style={styles.headerTextContainer}>
           <Text style={styles.title}>Your Journal Entries</Text>
           {/* Summary of total entries WIP */}
-          <Text style={styles.entryCount}>Entries: {entries.length}</Text>
+          <Text style={journalStyles.entryCount}>Entries: {entries.length}</Text>
         </View>
 
         {/* Add new entry button */}
-        <Pressable onPress={() => navigation.navigate('NewEntry')} style={styles.addButton}>
-          <Text style={styles.addButtonText}>+</Text>
+        <Pressable onPress={() => navigation.navigate('NewEntry')} style={journalStyles.addButton}>
+          <Text style={journalStyles.addButtonText}>+</Text>
         </Pressable>
       </View>
 
       {/* Search bar placeholder (Add filtering later) */}
-      <View style={styles.searchContainer}>
+      <View style={journalStyles.searchContainer}>
         {/* Search bar can be implemented here in the future */}
         <Text style={styles.text}>Search bar WIP</Text>
       </View>
@@ -41,7 +43,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
       <FlatList 
         data={entries}
         keyExtractor={(item) => item.id}
-        contentContainerStyle = { styles.entryList }
+        contentContainerStyle = { journalStyles.entryList }
         ListEmptyComponent={() => (
           <View style={styles.card}>
             <Text style={styles.text}>No entries yet. Start journaling!</Text>
@@ -50,7 +52,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
         renderItem={({item}) => (
           <Pressable onPress={() => navigation.navigate('ViewEntry', { entry: item })}>
             <View style={styles.card}>
-              <Text style={styles.journalEntryLabel}>{item.title}</Text>
+              <Text style={journalStyles.journalEntryLabel}>{item.title}</Text>
               <Text numberOfLines={2}>{item.content}</Text>
             </View>
           </Pressable>

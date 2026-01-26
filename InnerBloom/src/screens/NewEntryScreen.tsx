@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Text, TextInput, View } from 'react-native';
+
+// SRC Imports
 import { Entry } from '../types/entry';
 import { styles } from '../styles/commonStyles';
+import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';
 
 type Props = {
   entries: Entry[];
@@ -31,7 +34,7 @@ export default function NewEntryScreen({ entries, setEntries }: Props) {
           placeholder="Title"
           value={title}
           onChangeText={setTitle}
-          style={styles.titleInput}
+          style={journalStyles.titleInput}
         />
         <TextInput
           placeholder="Write something..."

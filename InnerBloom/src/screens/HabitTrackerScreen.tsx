@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { styles } from '../styles/commonStyles';
 
+// SRC Imports
+import { styles } from '../styles/commonStyles';
 
 export default function HabitTrackerScreen() {
   return (

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { styles } from '../styles/commonStyles';
 
+// SRC Imports
+import { styles } from '../styles/commonStyles';
 import { Mood } from '../types/mood';
 
 const MOODS: { key: Mood; emoji: string }[] = [

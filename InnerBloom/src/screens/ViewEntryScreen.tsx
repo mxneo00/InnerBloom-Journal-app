@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { styles } from '../styles/commonStyles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+// SRC Imports
+import { styles } from '../styles/commonStyles';
 import { Entry } from '../types/entry';
 import { JournalStackParamList } from '../../App';
 
