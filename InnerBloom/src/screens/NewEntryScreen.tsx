@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Button, TextInput, View } from 'react-native';
 
 // SRC Imports
 import { Entry } from '../types/entry';
