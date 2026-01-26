@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 
 // SRC Imports
 import { styles } from '../styles/commonStyles';
+import { habitStyles } from '../styles/habitTrackerScreenStyles';
 
 export default function HabitTrackerScreen() {
   return (
