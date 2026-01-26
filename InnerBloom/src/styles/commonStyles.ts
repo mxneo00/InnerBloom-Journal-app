@@ -47,12 +47,6 @@ export const styles = StyleSheet.create({
   buttonText: {
     fontSize: 24,
   },
-  entryItem: {
-    marginBottom: 12,
-  },
-  entryLabel: {
-    fontWeight: 'bold',
-  },
   moodContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -75,15 +69,5 @@ export const styles = StyleSheet.create({
   },
   emoji: {
     fontSize: 26,
-  },
-  journalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-    width: '100%',
-  },
-  headerTextContainer: {
-    flexDirection: 'column',
   },
 });

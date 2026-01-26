@@ -1,6 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 export const journalScreenStyles = StyleSheet.create({
+journalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+    width: '100%',
+  },
+  headerTextContainer: {
+    flexDirection: 'column',
+  },
   entryCount: {
     fontSize: 16,
     color: '#7A8A8A',

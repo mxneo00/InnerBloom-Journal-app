@@ -33,21 +33,12 @@ export default function App() {
     return (
       <Stack.Navigator>
         <Stack.Screen name="JournalMain" options={{ headerShown: false }}>
-          {(props) => (
-            <JournalScreen
-              {...props}
-              entries={entries}
-            />
-          )}
+          {(props) => ( <JournalScreen {...props} entries={entries}/>)}
         </Stack.Screen>
         <Stack.Screen name="NewEntry" options={{ title: 'New Journal Entry' }}>
           {() => <NewEntryScreen entries={entries} setEntries={setEntries} />}
         </Stack.Screen>
-        <Stack.Screen
-          name="ViewEntry"
-          component={ViewEntryScreen}
-          options={{ title: 'View Entry' }}
-        />
+        <Stack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'View Entry' }}/>
       </Stack.Navigator>
     );}
 

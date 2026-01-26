@@ -20,8 +20,8 @@ type Props = {
 export default function JournalScreen({ entries, navigation }: Props) {
   return (
     <View style={styles.container}>
-      <View style={styles.journalHeader}>
-        <View style={styles.headerTextContainer}>
+      <View style={journalStyles.journalHeader}>
+        <View style={journalStyles.headerTextContainer}>
           <Text style={styles.title}>Your Journal Entries</Text>
           {/* Summary of total entries WIP */}
           <Text style={journalStyles.entryCount}>Entries: {entries.length}</Text>
