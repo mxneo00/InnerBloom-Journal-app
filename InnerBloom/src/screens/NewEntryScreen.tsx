@@ -9,26 +9,34 @@ type Props = {
 };
 
 export default function NewEntryScreen({ entries, setEntries }: Props) {
-  const [text, setText] = useState('');
+  const [content, setContent] = useState('');
+  const [title, setTitle] = useState('');
 
   const handleSave = () => {
-    if (text.trim() === '') return;
+    if (content.trim() === '') return;
 
     setEntries(prev => [
       ...prev,
-      { id: Date.now().toString(), content: text },
+      { id: Date.now().toString(), title: title, content: content },
     ]);
 
-    setText('');
+    setTitle('');
+    setContent('');
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         <TextInput
+          placeholder="Title"
+          value={title}
+          onChangeText={setTitle}
+          style={styles.input}
+        />
+        <TextInput
           placeholder="Write something..."
-          value={text}
-          onChangeText={setText}
+          value={content}
+          onChangeText={setContent}
           multiline
           style={styles.input}
         />
