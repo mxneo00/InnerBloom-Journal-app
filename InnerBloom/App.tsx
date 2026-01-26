@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { enableScreens } from 'react-native-screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// SRC Imports
 import HomeScreen from './src/screens/HomeScreen';
 import JournalScreen from './src/screens/JournalScreen';
 import NewEntryScreen from './src/screens/NewEntryScreen';
@@ -11,16 +12,11 @@ import { ViewEntryScreen } from './src/screens/ViewEntryScreen';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import { Entry } from './src/types/entry';
 
-// Importing the old journal screen for reference
-import OldJournalScreen from './src/screens/OldJournalScreen';
-
 enableScreens(false);
 
 type TabParamList = {
   Home: undefined;
   Journal: undefined;
-  //OldJournal: undefined;
-  //NewEntry: undefined;
   HabitTracker: undefined;
 };
 
@@ -33,14 +29,13 @@ export type JournalStackParamList = {
 const Tab = createBottomTabNavigator<TabParamList>();
 const Stack = createNativeStackNavigator<JournalStackParamList>();
 
-
 export default function App() {
   const [entries, setEntries] = useState<Entry[]>([]);
 
   function JournalStack() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="JournalMain">
+        <Stack.Screen name="JournalMain" options={{ headerShown: false }}>
           {(props) => (
             <JournalScreen
               {...props}
@@ -48,7 +43,7 @@ export default function App() {
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="NewEntry">
+        <Stack.Screen name="NewEntry" options={{ title: 'New Journal Entry' }}>
           {() => <NewEntryScreen entries={entries} setEntries={setEntries} />}
         </Stack.Screen>
         <Stack.Screen name="ViewEntry" component={ViewEntryScreen} />

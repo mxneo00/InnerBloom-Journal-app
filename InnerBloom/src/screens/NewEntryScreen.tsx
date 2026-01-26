@@ -11,7 +11,6 @@ type Props = {
 export default function NewEntryScreen({ entries, setEntries }: Props) {
   const [text, setText] = useState('');
 
-  // Add auto swap to journal screen after save
   const handleSave = () => {
     if (text.trim() === '') return;
 
@@ -25,8 +24,6 @@ export default function NewEntryScreen({ entries, setEntries }: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>New Journal Entry</Text>
-      {/* Make into a card element */}
       <View style={styles.card}>
         <TextInput
           placeholder="Write something..."

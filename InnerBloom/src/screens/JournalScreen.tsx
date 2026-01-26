@@ -54,9 +54,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
               <Text numberOfLines={2}>{item.content}</Text>
             </View>
           </Pressable>
-        )}
-        >
-      
+        )}>
       </FlatList>
     </View>
   );
