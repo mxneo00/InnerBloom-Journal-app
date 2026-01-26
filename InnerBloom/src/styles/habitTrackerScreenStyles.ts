@@ -57,4 +57,11 @@ export const habitStyles = StyleSheet.create({
     fontWeight: '600',
     color: '#111827',
   },
+  habitInput: {
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 12,
+  },
 });
