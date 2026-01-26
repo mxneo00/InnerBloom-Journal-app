@@ -127,5 +127,35 @@ export const habitStyles = StyleSheet.create({
     fontSize: 14,
     color: '#9CA3AF',
   },
-
+  frequencyLabel: {
+  marginTop: 6,
+  marginBottom: 8,
+  fontSize: 14,
+  fontWeight: '600',
+  color: '#374151',
+},
+frequencyRow: {
+  flexDirection: 'row',
+  gap: 10,
+},
+frequencyButton: {
+  paddingVertical: 8,
+  paddingHorizontal: 12,
+  borderRadius: 18,
+  borderWidth: 1,
+  borderColor: '#D1D5DB',
+  backgroundColor: '#FFFFFF',
+},
+frequencySelected: {
+  borderColor: '#10B981',
+  backgroundColor: '#E5F4EE',
+},
+frequencyButtonText: {
+  fontSize: 14,
+  fontWeight: '600',
+  color: '#374151',
+},
+frequencySelectedText: {
+  color: '#065F46',
+},
 });

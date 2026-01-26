@@ -9,9 +9,10 @@ import { journalScreenStyles as journalStyles } from '../styles/journalScreenSty
 type Props = {
   entries: Entry[];
   setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
+  goBack: () => void;
 };
 
-export default function NewEntryScreen({ entries, setEntries }: Props) {
+export default function NewEntryScreen({ entries, setEntries, goBack }: Props) {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
 
@@ -25,6 +26,7 @@ export default function NewEntryScreen({ entries, setEntries }: Props) {
 
     setTitle('');
     setContent('');
+    goBack();
   };
 
   return (

@@ -1,28 +1,32 @@
 import React, { useState } from 'react';
-import { Button, TextInput, View } from 'react-native';
+import {Pressable, Button, TextInput, View, Text } from 'react-native';
 
 // SRC Imports
-import { habit } from '../types/habit';
+import { Habit } from '../types/habit';
 import { styles } from '../styles/commonStyles';
 import { habitStyles as habitStyles } from '../styles/habitTrackerScreenStyles';
 
 type Props = {
-  habits: habit[];
-  setHabits: React.Dispatch<React.SetStateAction<habit[]>>;
+  addHabit: (habit: Habit) => void;
+  goBack: () => void
 };
 
-export default function AddHabitScreen({ habits, setHabits }: Props) {
+export default function AddHabitScreen({ addHabit, goBack }: Props) {
   const [name, setName] = useState('');
-  const [frequency, setFrequency] = useState<'daily' | 'weekly' | 'monthly'>('daily');
+  const [frequency, setFrequency] = useState<'daily' | 'weekly'>('daily');
 
   const handleAddHabit = () => {
-    if (name.trim() === '') return;
-    setHabits(prev => [
-      ...prev,
-      { id: Date.now().toString(), name: name, frequency: frequency, streak: 0 },
-    ]);
-    setName('');
-    setFrequency('daily');
+    const trimmed = name.trim();
+    if (!trimmed) return;
+
+    addHabit({
+      id: Date.now().toString(),
+      name: trimmed,
+      frequency,
+      completionsByDate: {},
+      weeklyCompletion: false,
+    });
+    goBack();
   };
 
     return (
@@ -34,15 +38,18 @@ export default function AddHabitScreen({ habits, setHabits }: Props) {
             onChangeText={setName}
             style={habitStyles.habitInput}
         />
-        <TextInput
-            placeholder="Frequency (daily, weekly, monthly)"
-            value={frequency}
-            onChangeText={(text) => {
-                if (text === 'daily' || text === 'weekly' || text === 'monthly') {
-                    setFrequency(text);
-                }}}
-            style={habitStyles.habitInput}
-        />
+
+        <Text style={habitStyles.frequencyLabel}>Frequency</Text>
+
+        <View style={habitStyles.frequencyRow}>
+          <Pressable onPress={() => setFrequency('daily')} style={[habitStyles.frequencyButton, frequency === 'daily' && habitStyles.frequencySelected,]}>
+            <Text style={[habitStyles.frequencyButtonText, frequency === 'daily' && habitStyles.frequencySelectedText]}>Daily</Text>
+          </Pressable>
+          <Pressable onPress={() => setFrequency('weekly')} style={[habitStyles.frequencyButton, frequency === 'weekly' && habitStyles.frequencySelected,]}>
+            <Text style={[habitStyles.frequencyButtonText, frequency === 'weekly' && habitStyles.frequencySelectedText]}>Weekly</Text>
+          </Pressable>
+        </View>
+        
         </View>
         <View style={styles.buttonContainer}>
           <Button title="Add Habit" onPress={handleAddHabit} />
