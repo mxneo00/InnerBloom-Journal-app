@@ -9,8 +9,8 @@ export default function HabitTrackerScreen() {
   return (
     <View style={styles.container}>
       {/* Weekly Header Section */}
-      <View style={habitStyles.weeklyHeader}>
-        <Text style={habitStyles.weeklyHeaderText}>This Weeks Habits</Text>
+      <View style={habitStyles.habitHeader}>
+        <Text style={habitStyles.habitHeaderText}>This Weeks Habits</Text>
         <Text style={habitStyles.daterange}>Date1 - Date2</Text>
         <Text style={habitStyles.progress}>Progress: 12/21</Text>
         <Pressable style={habitStyles.addHabitButton}>
@@ -19,11 +19,15 @@ export default function HabitTrackerScreen() {
       </View>
       {/* Daily Habit Section */}
       <View style={styles.card}>
-        <Text style={styles.text}>Daily Habits</Text>
+        <View style={habitStyles.dailyHeader}>
+          <Text style={habitStyles.dailyHeaderText}>Daily habits section</Text>
+        </View>
       </View>
       {/* Weely Habit Section */}
       <View style={styles.card}>
-        <Text style={styles.text}>Weekly Habits</Text>
+        <View style={habitStyles.weeklyHeader}>
+          <Text style={habitStyles.weeklyHeaderText}>Weekly habits section</Text>
+        </View>
       </View>
     </View>
   );

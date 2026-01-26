@@ -1,7 +1,19 @@
 import { StyleSheet } from 'react-native';
 
 export const habitStyles = StyleSheet.create({
-   weeklyHeader: {
+    habitHeader: {
+        
+    },
+    habitHeaderText: {
+
+    },
+    dailyHeader: {
+
+    },
+    dailyHeaderText: {
+
+    },
+    weeklyHeader: {
         
     },
     weeklyHeaderText: {
