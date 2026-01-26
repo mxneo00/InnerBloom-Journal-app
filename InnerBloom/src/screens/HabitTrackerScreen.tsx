@@ -6,8 +6,8 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 // SRC Imports
 import { styles } from '../styles/commonStyles';
 import { habitStyles } from '../styles/habitTrackerScreenStyles';
-import DailyHabitRow from '../screens/DailyHabitRow';
-import WeeklyHabitRow from '../screens/WeeklyHabitRow';
+import DailyHabitRow from '../components/DailyHabitRow';
+import WeeklyHabitRow from '../components/WeeklyHabitRow';
 import type { Habit } from '../types/habit';
 import { HabitStackParamList } from '../../App';
 
