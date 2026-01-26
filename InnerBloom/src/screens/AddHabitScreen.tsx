@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextInput, View } from 'react-native';
 
+// SRC Imports
 import { habit } from '../types/habit';
 import { styles } from '../styles/commonStyles';
 import { habitStyles as habitStyles } from '../styles/habitTrackerScreenStyles';
