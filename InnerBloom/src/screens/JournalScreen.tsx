@@ -47,7 +47,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
             <Text style={styles.text}>No entries yet. Start journaling!</Text>
           </View>
         )}
-        renderItem={({item, index}) => (
+        renderItem={({item}) => (
           <Pressable onPress={() => navigation.navigate('ViewEntry', { entry: item })}>
             <View style={styles.card}>
               <Text style={styles.journalEntryLabel}>{item.title}</Text>
