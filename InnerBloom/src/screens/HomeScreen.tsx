@@ -40,8 +40,7 @@ export default function HomeScreen() {
                     styles.moodButton,
                     isSelected && styles.moodButtonSelected,
                     pressed && styles.moodButtonPressed,
-                  ]}
-                >
+                  ]}>
                   <Text style={styles.emoji}>{mood.emoji}</Text>
                 </Pressable>
               );
