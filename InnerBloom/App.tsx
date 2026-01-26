@@ -43,7 +43,11 @@ export default function App() {
         <Stack.Screen name="NewEntry" options={{ title: 'New Journal Entry' }}>
           {() => <NewEntryScreen entries={entries} setEntries={setEntries} />}
         </Stack.Screen>
-        <Stack.Screen name="ViewEntry" component={ViewEntryScreen} />
+        <Stack.Screen
+          name="ViewEntry"
+          component={ViewEntryScreen}
+          options={{ title: 'View Entry' }}
+        />
       </Stack.Navigator>
     );}
 

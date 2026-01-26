@@ -1,14 +1,21 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { styles } from '../styles/commonStyles';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import { Entry } from '../types/entry';
+import { JournalStackParamList } from '../../App';
 
-export function ViewEntryScreen() {
+type Props = NativeStackScreenProps<JournalStackParamList, 'ViewEntry'>;
+
+export function ViewEntryScreen({ route }: Props) {
+  const { entry } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Entry</Text>
-      <View style={styles.card}>
-        <Text style={styles.text}>Feature coming soon!</Text>
+      <View key={entry.id} style={styles.card}>
+        <Text style={styles.title}>{entry.title}</Text>
+        <Text style={styles.text}>{entry.content}</Text>
       </View>
     </View>
   );
