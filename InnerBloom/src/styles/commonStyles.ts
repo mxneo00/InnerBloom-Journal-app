@@ -115,4 +115,12 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 4,
   },
+  titleInput: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+  },
 });

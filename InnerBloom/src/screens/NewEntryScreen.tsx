@@ -31,7 +31,7 @@ export default function NewEntryScreen({ entries, setEntries }: Props) {
           placeholder="Title"
           value={title}
           onChangeText={setTitle}
-          style={styles.input}
+          style={styles.titleInput}
         />
         <TextInput
           placeholder="Write something..."
