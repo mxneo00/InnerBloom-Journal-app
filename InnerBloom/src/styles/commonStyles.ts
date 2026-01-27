@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.backgroundAlt,
   },
   header: {
-    marginBottom: 24,
+    marginBottom: 28,
   },
 
   /* ---------- Text ---------- */
@@ -21,21 +21,21 @@ export const styles = StyleSheet.create({
   },
   date: {
     fontSize: 14,
-    color: colors.textMuted, // replace '#7A8A8A'
+    color: colors.textMuted,
   },
   text: {
     fontSize: 16,
-    color: colors.textSecondary, // replace '#666'
+    color: colors.textSecondary,
   },
 
   /* ---------- Card ---------- */
   card: {
-    backgroundColor: colors.primaryLight, // replace '#d6f9df'
+    backgroundColor: colors.primaryLight,
     borderRadius: 16,
     padding: 18,
     marginBottom: 24,
 
-    shadowColor: colors.primaryDark, // replace '#577568'
+    shadowColor: colors.primaryDark,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.12,
     shadowRadius: 8,
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: colors.border, // replace '#ccc'
+    borderColor: colors.border,
     borderRadius: 8,
     backgroundColor: colors.surface,
     color: colors.textPrimary,
