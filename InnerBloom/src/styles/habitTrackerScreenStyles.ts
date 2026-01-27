@@ -70,7 +70,7 @@ export const habitStyles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingTop: 8,
     paddingBottom: 6,
-    gap: 12,
+    gap: 12.5,
   },
   dayHeaderText: {
     width: 18,
@@ -95,11 +95,11 @@ export const habitStyles = StyleSheet.create({
   dayBoxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 10.3,
   },
   dayBox: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     borderRadius: 6,
     borderWidth: 1,
     borderColor: '#D1D5DB',
