@@ -1,51 +1,62 @@
 import { StyleSheet } from 'react-native';
+import { colors } from './colors';
 
 export const journalScreenStyles = StyleSheet.create({
-journalHeader: {
+  /* ---------- Header ---------- */
+  journalHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
     width: '100%',
+    marginBottom: 16,
   },
   headerTextContainer: {
     flexDirection: 'column',
   },
   entryCount: {
-    fontSize: 16,
-    color: '#7A8A8A',
     marginTop: 4,
+    fontSize: 16,
+    color: colors.textMuted, 
   },
+
+  /* ---------- Add Entry Button ---------- */
   addButton: {
-    backgroundColor: '#d6f9df',
     width: 40,
     height: 40,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.primaryLight, 
   },
   addButtonText: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#2f3e46',
+    fontWeight: '700',
+    color: colors.textPrimary, 
   },
+
+  /* ---------- Search / List ---------- */
   searchContainer: {
-    marginBottom: 16,
     width: '100%',
+    marginBottom: 16,
   },
   entryList: {
     paddingBottom: 24,
   },
+
+  /* ---------- Entry Inputs ---------- */
   journalEntryLabel: {
-    fontWeight: 'bold',
     marginBottom: 4,
+    fontWeight: '700',
+    color: colors.textPrimary,
   },
   titleInput: {
     height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
     padding: 12,
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: colors.border, 
+    borderRadius: 8,
+    backgroundColor: colors.surface,
+    color: colors.textPrimary,
   },
 });

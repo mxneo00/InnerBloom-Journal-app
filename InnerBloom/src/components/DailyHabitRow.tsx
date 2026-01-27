@@ -2,7 +2,6 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 // SRC Imports
-import { styles } from '../styles/commonStyles';
 import { habitStyles } from '../styles/habitTrackerScreenStyles';
 import type { Habit } from '../types/habit';
 
