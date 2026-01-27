@@ -58,7 +58,14 @@ export default function AddHabitScreen({ habits, setHabits }: Props) {
         
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Add Habit" onPress={handleAddHabit} />
+          <Pressable 
+            onPress={handleAddHabit}
+            style={({pressed}) => [
+              styles.saveButton,
+              pressed && styles.buttonPressed,
+            ]}>
+              <Text style={styles.saveButtonText}>Add Habit</Text>
+          </Pressable>
         </View>
     </View>
   );

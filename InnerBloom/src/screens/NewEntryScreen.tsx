@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextInput, View } from 'react-native';
+import { Button, TextInput, View, Pressable, Text } from 'react-native';
 
 // SRC Imports
 import { Entry } from '../types/entry';
@@ -45,8 +45,15 @@ export default function NewEntryScreen({ entries, setEntries }: Props) {
         />
       </View>
       <View style={styles.buttonContainer}>
-          <Button title="Save Entry" onPress={handleSave} />
-        </View>
+          <Pressable 
+            onPress={handleSave}
+            style={({pressed}) => [
+              styles.saveButton,
+              pressed && styles.buttonPressed,
+            ]}>
+              <Text style={styles.saveButtonText}>Save Entry</Text>
+          </Pressable>
+      </View>
     </View>
   );
 }

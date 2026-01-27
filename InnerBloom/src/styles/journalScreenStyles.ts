@@ -19,7 +19,7 @@ export const journalScreenStyles = StyleSheet.create({
     color: colors.textMuted, 
   },
 
-  /* ---------- Add Entry Button ---------- */
+  /* ---------- Buttons ---------- */
   addButton: {
     width: 40,
     height: 40,
