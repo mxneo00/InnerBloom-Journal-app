@@ -163,7 +163,7 @@ export const habitStyles = StyleSheet.create({
   },
   frequencySelected: {
     borderColor: colors.primary,
-    backgroundColor: colors.primaryLight,
+    backgroundColor: colors.primaryExtraLight,
   },
   frequencyButtonText: {
     fontSize: 14,
@@ -171,7 +171,7 @@ export const habitStyles = StyleSheet.create({
     color: colors.textSecondary,
   },
   frequencySelectedText: {
-    color: colors.primaryDark,
+    color: colors.textPrimary,
   },
 
   /* ---------- Empty State ---------- */

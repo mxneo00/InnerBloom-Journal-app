@@ -3,8 +3,9 @@
 export const colors = {
   /* ---------- Brand / Accent ---------- */
   primary: '#10B981',       // Green (habits, success)
-  primaryDark: '#065F46',
-  primaryLight: '#E5F4EE',
+  primaryDark: '#577568',
+  primaryLight: '#d6f9df',
+  primaryExtraLight: '#E5F4EE',
 
   /* ---------- Text ---------- */
   textPrimary: '#111827',
