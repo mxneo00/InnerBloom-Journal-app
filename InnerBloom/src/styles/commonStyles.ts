@@ -61,6 +61,21 @@ export const styles = StyleSheet.create({
   buttonText: {
     fontSize: 24,
   },
+  saveButton: {
+    backgroundColor: colors.primary,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  saveButtonText: {
+    color: colors.textPrimary,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  buttonPressed: {
+    opacity: 0.7,
+  },
 
   /* ---------- Mood Picker ---------- */
   moodContainer: {
