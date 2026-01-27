@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import { ScrollView, Pressable, Text, View } from 'react-native';
 import type { Dispatch, SetStateAction } from 'react';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -85,8 +85,9 @@ export default function HabitTrackerScreen({ habits, setHabits, navigation }: Pr
           <Text style={habitStyles.addHabitButtonText}>+ Add Habit</Text>
         </Pressable>
       </View>
-
-      {/* Daily Habit Section */}
+      
+      <ScrollView>
+        {/* Daily Habit Section */}
       <View style={styles.card}>
         {/* Daily Header */}
         <View style={habitStyles.dailyHeader}>
@@ -115,7 +116,7 @@ export default function HabitTrackerScreen({ habits, setHabits, navigation }: Pr
         )}
       </View>
 
-      {/* Weekly Habit Section */}
+        {/* Weekly Habit Section */}
       <View style={styles.card}>
         <View style={habitStyles.weeklyHeader}>
           <Text style={habitStyles.weeklyHeaderText}>Weekly Habits</Text>
@@ -134,6 +135,7 @@ export default function HabitTrackerScreen({ habits, setHabits, navigation }: Pr
           ))
         )}
       </View>
+      </ScrollView>
     </View>
   );
 }

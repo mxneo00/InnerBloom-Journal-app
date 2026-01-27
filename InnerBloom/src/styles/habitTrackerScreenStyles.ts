@@ -47,13 +47,13 @@ export const habitStyles = StyleSheet.create({
   dailyHeader: {
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
     borderBottomColor: colors.borderLight,
   },
   weeklyHeader: {
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
     borderBottomColor: colors.borderLight,
   },
   dailyHeaderText: {
@@ -71,7 +71,7 @@ export const habitStyles = StyleSheet.create({
   habitInput: {
     marginBottom: 12,
     padding: 10,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: colors.border,
     borderRadius: 8,
   },
@@ -119,7 +119,7 @@ export const habitStyles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 6,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: colors.border,
     backgroundColor: colors.background,
   },
@@ -132,7 +132,7 @@ export const habitStyles = StyleSheet.create({
     width: 22,
     height: 22,
     borderRadius: 7,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: colors.border,
     backgroundColor: colors.background,
   },
@@ -151,13 +151,13 @@ export const habitStyles = StyleSheet.create({
   },
   frequencyRow: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 15,
   },
   frequencyButton: {
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 18,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: colors.border,
     backgroundColor: colors.background,
   },
