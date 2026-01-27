@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 
 // SRC Imports
 import HomeScreen from './src/screens/HomeScreen';
@@ -67,10 +68,28 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={({route}) => ({
+          tabBarIcon: ({focused, color, size}) => {
+            let iconName;
+
+            if (route.name === 'Home'){
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name === 'Journal'){
+              iconName = focused ? 'book' : 'book-outline';
+            } else if (route.name === 'HabitTracker'){
+              iconName = focused ? 'checkmark-circle' : 'checkmark-circle-outline'
+            }
+            return <Ionicons name={iconName} size={size} color={color}/>;
+          },
+          tabBarActiveTintColor: '#2f3e46',
+          tabBarInactiveTintColor: '#9aa5a8',
+          headerShown: true,
+        })}
+      >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Journal" component={JournalStack}/>
-        <Tab.Screen name="HabitTracker" component={HabitStack} />
+        <Tab.Screen name="HabitTracker" component={HabitStack}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
