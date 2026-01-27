@@ -4,7 +4,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // SRC Imports
 import { styles } from '../styles/commonStyles';
-import { Entry } from '../types/entry';
 import { JournalStackParamList } from '../../App';
 
 type Props = NativeStackScreenProps<JournalStackParamList, 'ViewEntry'>;

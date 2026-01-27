@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
+import { colors } from './colors';
 
+/* =====================================================
+   HABIT STYLES
+===================================================== */
 export const habitStyles = StyleSheet.create({
+  /* ---------- Header ---------- */
   habitHeader: {
     paddingHorizontal: 16,
     paddingTop: 16,
@@ -14,56 +19,64 @@ export const habitStyles = StyleSheet.create({
   daterange: {
     marginTop: 4,
     fontSize: 14,
-    color: '#6B7280',
+    color: colors.textMuted,
   },
   progress: {
     marginTop: 6,
     fontSize: 14,
-    color: '#374151',
+    color: colors.textSecondary,
   },
+
+  /* ---------- Add Habit Button ---------- */
   addHabitButton: {
     position: 'absolute',
-    right: 16,
     top: 18,
+    right: 16,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 16,
-    backgroundColor: '#E5F4EE', 
+    backgroundColor: colors.primaryLight,
   },
   addHabitButtonText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#065F46',
+    color: colors.primaryDark,
   },
+
+  /* ---------- Section Headers ---------- */
   dailyHeader: {
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
-  },
-  dailyHeaderText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#111827',
+    borderBottomColor: colors.borderLight,
   },
   weeklyHeader: {
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: colors.borderLight,
+  },
+  dailyHeaderText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.textPrimary,
   },
   weeklyHeaderText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: colors.textPrimary,
   },
+
+  /* ---------- Inputs ---------- */
   habitInput: {
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 8,
-    padding: 10,
     marginBottom: 12,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 8,
   },
+
+  /* ---------- Day Labels ---------- */
   dayHeaderRow: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -77,8 +90,10 @@ export const habitStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     fontWeight: '600',
-    color: '#6B7280',
+    color: colors.textMuted,
   },
+
+  /* ---------- Habit Rows ---------- */
   habitRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -87,75 +102,83 @@ export const habitStyles = StyleSheet.create({
   },
   habitName: {
     flex: 1,
+    marginRight: 10,
     fontSize: 14,
     fontWeight: '600',
-    color: '#111827',
-    marginRight: 10,
+    color: colors.textPrimary,
   },
+
+  /* ---------- Day / Week Boxes ---------- */
   dayBoxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10.3,
   },
+
   dayBox: {
     width: 20,
     height: 20,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#D1D5DB',
-    backgroundColor: '#FFFFFF',
+    borderColor: colors.border,
+    backgroundColor: colors.background,
   },
   dayBoxChecked: {
-    backgroundColor: '#10B981',
-    borderColor: '#10B981',
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
+
   weeklyBox: {
     width: 22,
     height: 22,
     borderRadius: 7,
     borderWidth: 1,
-    borderColor: '#D1D5DB',
-    backgroundColor: '#FFFFFF',
+    borderColor: colors.border,
+    backgroundColor: colors.background,
   },
   weeklyBoxChecked: {
-    backgroundColor: '#10B981',
-    borderColor: '#10B981',
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
+
+  /* ---------- Frequency Selector ---------- */
+  frequencyLabel: {
+    marginTop: 6,
+    marginBottom: 8,
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.textSecondary,
+  },
+  frequencyRow: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  frequencyButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: colors.border,
+    backgroundColor: colors.background,
+  },
+  frequencySelected: {
+    borderColor: colors.primary,
+    backgroundColor: colors.primaryLight,
+  },
+  frequencyButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.textSecondary,
+  },
+  frequencySelectedText: {
+    color: colors.primaryDark,
+  },
+
+  /* ---------- Empty State ---------- */
   emptyText: {
     paddingVertical: 16,
     textAlign: 'center',
     fontSize: 14,
-    color: '#9CA3AF',
+    color: colors.textDisabled,
   },
-  frequencyLabel: {
-  marginTop: 6,
-  marginBottom: 8,
-  fontSize: 14,
-  fontWeight: '600',
-  color: '#374151',
-},
-frequencyRow: {
-  flexDirection: 'row',
-  gap: 10,
-},
-frequencyButton: {
-  paddingVertical: 8,
-  paddingHorizontal: 12,
-  borderRadius: 18,
-  borderWidth: 1,
-  borderColor: '#D1D5DB',
-  backgroundColor: '#FFFFFF',
-},
-frequencySelected: {
-  borderColor: '#10B981',
-  backgroundColor: '#E5F4EE',
-},
-frequencyButtonText: {
-  fontSize: 14,
-  fontWeight: '600',
-  color: '#374151',
-},
-frequencySelectedText: {
-  color: '#065F46',
-},
 });

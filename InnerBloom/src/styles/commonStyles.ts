@@ -1,52 +1,68 @@
 import { StyleSheet } from 'react-native';
+import { colors } from './colors';
 
 export const styles = StyleSheet.create({
+  /* ---------- Layout ---------- */
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#F3F7F4',
+    backgroundColor: colors.backgroundAlt,
   },
   header: {
     marginBottom: 24,
   },
+
+  /* ---------- Text ---------- */
+  title: {
+    fontSize: 26,
+    fontWeight: '700',
+    marginBottom: 12,
+    color: colors.textPrimary,
+  },
   date: {
     fontSize: 14,
-    color: '#7A8A8A',
+    color: colors.textMuted, // replace '#7A8A8A'
   },
+  text: {
+    fontSize: 16,
+    color: colors.textSecondary, // replace '#666'
+  },
+
+  /* ---------- Card ---------- */
   card: {
-    backgroundColor: '#d6f9df', 
+    backgroundColor: colors.primaryLight, // replace '#d6f9df'
     borderRadius: 16,
     padding: 18,
     marginBottom: 24,
-    shadowColor: '#577568',
+
+    shadowColor: colors.primaryDark, // replace '#577568'
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.12,
     shadowRadius: 8,
     elevation: 3,
   },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    marginBottom: 12,
-  },
-  text: {
-    fontSize: 16,
-    color: '#666',
-  },
+
+  /* ---------- Inputs ---------- */
   input: {
     height: 150,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
     padding: 12,
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: colors.border, // replace '#ccc'
+    borderRadius: 8,
+    backgroundColor: colors.surface,
+    color: colors.textPrimary,
   },
+
+  /* ---------- Buttons ---------- */
   buttonContainer: {
     marginTop: 8,
   },
   buttonText: {
     fontSize: 24,
   },
+
+  /* ---------- Mood Picker ---------- */
   moodContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -58,7 +74,7 @@ export const styles = StyleSheet.create({
     borderRadius: 28,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#d6f9df',
+    backgroundColor: colors.primaryLight,
   },
   moodButtonSelected: {
     backgroundColor: '#b2d3c5',
