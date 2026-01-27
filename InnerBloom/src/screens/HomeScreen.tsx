@@ -17,17 +17,24 @@ const MOODS: { key: Mood; emoji: string }[] = [
 export default function HomeScreen() {
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
 
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
       {/* Customized welcome message */}
       <Text style={styles.title}>Welcome back!</Text>
       {/* Display current date */}
-      <Text style={styles.date}>June 10, 2024</Text>
+      <Text style={styles.date}>{formattedDate}</Text>
       </View>
 
       <View style={styles.card}>
-        {/* Current Mood Display WIP  (Display side by side) */}
+        {/* Current Mood Display */}
         <Text style={styles.text}>Current Mood</Text>
 
         <View style={styles.moodContainer}>
