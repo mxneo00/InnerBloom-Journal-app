@@ -11,6 +11,10 @@ type Props = NativeStackScreenProps<JournalStackParamList, 'ViewEntry'>;
 export function ViewEntryScreen({ route }: Props) {
   const { entry } = route.params;
 
+  const handleEdit = () => {
+    // Placeholder for edit functionality
+    console.log('Edit entry with id:', entry.id);
+  };
   const handleDelete = () => {
     // Placeholder for delete functionality
     console.log('Delete entry with id:', entry.id);
@@ -23,6 +27,14 @@ export function ViewEntryScreen({ route }: Props) {
         <Text style={styles.text}>{entry.content}</Text>
       </View>
       <View style={styles.buttonContainer}>
+        <Pressable
+          onPress={handleEdit}
+          style={({ pressed }) => [
+            styles.editButton,
+            pressed && styles.buttonPressed,
+          ]}>
+          <Text style={styles.editButtonText}>Edit</Text>
+        </Pressable>
         <Pressable 
           onPress={handleDelete}
           style={({ pressed }) => [
