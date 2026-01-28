@@ -1,24 +1,45 @@
 import React from 'react';
-import { Text, View, Pressable } from 'react-native';
+import { useMemo } from 'react';
+import { Text, View, Pressable, Alert } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // SRC Imports
 import { styles } from '../styles/commonStyles';
 import { JournalStackParamList } from '../../App';
+import { deleteEntry } from '../services/entriesService';
+import { Entry } from '../types/entry';
 
-type Props = NativeStackScreenProps<JournalStackParamList, 'ViewEntry'>;
+type NavProps = NativeStackScreenProps<JournalStackParamList, 'ViewEntry'>;
+type Props = NavProps & {
+  entries: Entry[];
+};
 
-export function ViewEntryScreen({ route }: Props) {
-  const { entry } = route.params;
+export function ViewEntryScreen({ navigation, route, entries }: Props) {
+  const entryId = route.params.entry.id;
+  const entry = useMemo(() => {
+    return entries.find(e => e.id === entryId) ?? route.params.entry;
+  }, [entries, entryId, route.params.entry]);
 
-  const handleEdit = () => {
-    // Placeholder for edit functionality
-    console.log('Edit entry with id:', entry.id);
-  };
   const handleDelete = () => {
-    // Placeholder for delete functionality
-    console.log('Delete entry with id:', entry.id);
+    Alert.alert(
+      'Delete Entry',
+      'Are you sure you want to delete this entry?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete', style: 'destructive', onPress: () => onDelete() },
+      ]
+    );
   };
+
+  const onDelete = async () => {
+    try {
+      await deleteEntry(entry.id);
+      navigation.navigate('JournalMain');
+    } catch (error) {
+      console.error('Error deleting entry:', error);
+    }
+  };
+
 
   return (
     <View style={styles.container}>
@@ -28,7 +49,7 @@ export function ViewEntryScreen({ route }: Props) {
       </View>
       <View style={styles.buttonContainer}>
         <Pressable
-          onPress={handleEdit}
+          onPress={() => navigation.navigate('EditEntry', { entry })}
           style={({ pressed }) => [
             styles.editButton,
             pressed && styles.buttonPressed,
