@@ -10,13 +10,13 @@ export interface Entry {
     updatedAt?: Date;
 }
 
-export interface NewEntry {
+export interface NewEntryInput {
     title: string;
     content: string;
     //mood: string;
 }
 
-export interface UpdateEntry {
+export interface UpdateEntryInput {
     title?: string;
     content?: string;
     //mood?: string;
@@ -24,7 +24,7 @@ export interface UpdateEntry {
 
 const ENTRIES_COLLECTION = "entries";
 
-export const createEntry = async (entry: NewEntry): Promise<string> => {
+export const createEntry = async (entry: NewEntryInput): Promise<string> => {
     try{
         const entriesCollectionRef = collection(db, ENTRIES_COLLECTION);
         const entryData = {
@@ -86,7 +86,7 @@ export const getAllEntries = async (): Promise<Entry[]> => {
     }
 };
 
-export const updateEntry = async (entryId: string, updates: UpdateEntry): Promise<void> => {
+export const updateEntry = async (entryId: string, updates: UpdateEntryInput): Promise<void> => {
     try {
         const entryDocRef = doc(db, ENTRIES_COLLECTION, entryId);
         const updateData: any = {
@@ -111,3 +111,31 @@ export const deleteEntry = async (entryId: string): Promise<void> => {
         throw error;
     }
 };
+
+export const subscribeToEntries = (
+    callback: (entries: Entry[]) => void): (() => void) => {
+    const entriesQuery = query(
+        collection(db, ENTRIES_COLLECTION),
+        orderBy("createdAt", "desc")
+    );
+    const unsubscribe = onSnapshot(entriesQuery, (querySnapshot) => {
+        const entries: Entry[] = querySnapshot.docs.map((docSnapshot) => {
+            const data = docSnapshot.data();
+            return {
+                id: docSnapshot.id,
+                title: data.title,
+                content: data.content,
+                createdAt: data.createdAt?.toDate?.() ?? new Date(),
+                updatedAt: data.updatedAt ? data.updatedAt.toDate() : undefined,
+            };
+        });
+        callback(entries);
+    }, (error) => {
+        console.error("Error subscribing to entries: ", error);
+    });
+
+    return unsubscribe;
+};
+
+// Additional functions for querying entries by date, mood, etc., can be added here.
+    

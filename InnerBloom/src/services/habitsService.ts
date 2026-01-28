@@ -109,3 +109,22 @@ export const deleteHabit = async (habitId: string): Promise<void> => {
         throw error;
     }
 };
+
+export const subscribeToHabits = (callback: (habits: Habit[]) => void): (() => void) => {
+    const habitsCollectionRef = collection(db, HABITS_COLLECTION);
+    const q = query(habitsCollectionRef, orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const habits: Habit[] = querySnapshot.docs.map((docSnapshot) => {
+            const data = docSnapshot.data();
+            return {
+                id: docSnapshot.id,
+                name: data.name,
+                frequency: data.frequency,
+                createdAt: data.createdAt?.toDate?.() ?? new Date(),
+                updatedAt: data.updatedAt ? data.updatedAt.toDate() : undefined,
+            };
+        });
+        callback(habits);
+    });
+    return unsubscribe;
+};
