@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
-import { Button, TextInput, View, Pressable, Text } from 'react-native';
+import { TextInput, View, Pressable, Text } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // SRC Imports
-import { Entry } from '../types/entry';
 import { styles } from '../styles/commonStyles';
 import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';
+import { createEntry } from '../services/entriesService';
+import { JournalStackParamList } from '../../App';
 
-type Props = {
-  entries: Entry[];
-  setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
-};
+type Props = NativeStackScreenProps<JournalStackParamList, 'NewEntry'>;
 
-export default function NewEntryScreen({ entries, setEntries }: Props) {
+export default function NewEntryScreen({ navigation }: Props) {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (content.trim() === '') return;
 
-    setEntries(prev => [
-      ...prev,
-      { id: Date.now().toString(), title: title, content: content },
-    ]);
-
-    setTitle('');
-    setContent('');
+    try {
+      await createEntry({ title, content });
+      setTitle('');
+      setContent('');
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error saving entry:', error);
+    }
   };
 
   return (

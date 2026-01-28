@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,12 +7,14 @@ import { Ionicons } from '@expo/vector-icons';
 // SRC Imports
 import HomeScreen from './src/screens/HomeScreen';
 import JournalScreen from './src/screens/JournalScreen';
-import NewEntryScreen from './src/screens/NewEntryScreen';
-import { ViewEntryScreen } from './src/screens/ViewEntryScreen';
+import NewEntryScreen from './src/components/NewEntryScreen';
+import { ViewEntryScreen } from './src/components/ViewEntryScreen';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
-import AddHabitScreen from './src/screens/AddHabitScreen';
+import AddHabitScreen from './src/components/AddHabitScreen';
 import { Entry } from './src/types/entry';
 import { Habit } from './src/types/habit';
+import { subscribeToEntries } from './src/services/entriesService';
+import { subscribeToHabits } from './src/services/habitsService';
 
 type TabParamList = {
   Home: undefined;
@@ -39,6 +41,20 @@ export default function App() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [habits, setHabits] = useState<Habit[]>([]);
 
+  useEffect(() => {
+    const unsubscribeEntries = subscribeToEntries((fetchedEntries) => {
+      setEntries(fetchedEntries);
+    });
+
+    const unsubscribeHabits = subscribeToHabits((fetchedHabits) => {
+      setHabits(fetchedHabits);
+    });
+    return () => {
+      unsubscribeEntries();
+      unsubscribeHabits();
+    };
+  }, []);
+
   function JournalStack() {
     return (
       <journalStack.Navigator>
@@ -46,7 +62,7 @@ export default function App() {
           {(props) => ( <JournalScreen {...props} entries={entries}/>)}
         </journalStack.Screen>
         <journalStack.Screen name="NewEntry" options={{ title: 'New Journal Entry' }}>
-          {() => <NewEntryScreen entries={entries} setEntries={setEntries} />}
+          {(props) => <NewEntryScreen {...props} />}
         </journalStack.Screen>
         <journalStack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'View Entry' }}/>
       </journalStack.Navigator>
@@ -60,7 +76,7 @@ export default function App() {
           {(props) => <HabitTrackerScreen {...props} habits={habits} setHabits={setHabits} />}
         </habitStack.Screen>
         <habitStack.Screen name="AddHabit" options={{ title: 'Add Habit' }}>
-          {(props) => <AddHabitScreen {...props} habits={habits} setHabits={setHabits} />}
+          {(props) => <AddHabitScreen {...props}  />}
         </habitStack.Screen>
       </habitStack.Navigator>
     );
