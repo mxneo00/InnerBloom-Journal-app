@@ -5,29 +5,32 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 // SRC Imports
 import { styles } from '../styles/commonStyles';
 import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';
-import { createEntry } from '../services/entriesService';
+import { updateEntry } from '../services/entriesService';
 import { JournalStackParamList } from '../../App';
 
-type Props = NativeStackScreenProps<JournalStackParamList, 'NewEntry'>;
+type Props = NativeStackScreenProps<JournalStackParamList, 'EditEntry'>;
 
-export default function NewEntryScreen({ navigation }: Props) {
-  const [content, setContent] = useState('');
-  const [title, setTitle] = useState('');
+export default function EditEntry({ navigation, route }: Props) {
+  const { entry } = route.params;
+
+  const [content, setContent] = useState(entry.content);
+  const [title, setTitle] = useState(entry.title);
 
   const handleSave = async () => {
     if (content.trim() === '') return;
 
     try {
-      await createEntry({ title, content });
-      setTitle('');
-      setContent('');
-      if (navigation.canGoBack()) {
+        await updateEntry(entry.id, { 
+            title: title.trim(), 
+            content: content.trim() 
+        });
+        if (navigation.canGoBack()) {
         navigation.goBack();
       } else {
-        navigation.navigate('JournalMain');
+        navigation.navigate('ViewEntry', { entry });
       }
     } catch (error) {
-      console.error('Error saving entry:', error);
+        console.error('Error updating entry:', error);
     }
   };
 
