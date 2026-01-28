@@ -61,6 +61,34 @@ export const styles = StyleSheet.create({
   buttonText: {
     fontSize: 24,
   },
+  buttonPressed: {
+    opacity: 0.7,
+  },
+  deleteButton: {
+    backgroundColor: colors.primaryDark,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  deleteButtonText: {
+    color: colors.textSecondary,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  editButton: {
+    backgroundColor: colors.primaryExtraLight,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  editButtonText: {
+    color: colors.textPrimary,
+    fontSize: 16,
+    fontWeight: '600',
+  },
   saveButton: {
     backgroundColor: colors.primary,
     paddingVertical: 12,
@@ -72,9 +100,6 @@ export const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: 16,
     fontWeight: '600',
-  },
-  buttonPressed: {
-    opacity: 0.7,
   },
 
   /* ---------- Mood Picker ---------- */

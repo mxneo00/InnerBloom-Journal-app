@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 // SRC Imports
 import { habitStyles } from '../styles/habitTrackerScreenStyles';
@@ -9,13 +10,13 @@ type Props = {
     habit: Habit;
     weekDateKeys: string[];
     onToggleDailyCompletion: (habitId: string, date: string) => void;
+    onDeleteHabit?: (habitId: string) => void;
 };
 
-export default function DailyHabitRow({ habit, weekDateKeys, onToggleDailyCompletion }: Props) {
+export default function DailyHabitRow({ habit, weekDateKeys, onToggleDailyCompletion, onDeleteHabit }: Props) {
     return (
         <View style={habitStyles.habitRow}>
             <Text style={habitStyles.habitName}>{habit.name}</Text>
-            
             <View style={habitStyles.dayBoxContainer}>
                 {weekDateKeys.map((dateKey) => {
                     const checked = !!habit.completionsByDate?.[dateKey];
@@ -28,6 +29,11 @@ export default function DailyHabitRow({ habit, weekDateKeys, onToggleDailyComple
                     );
                 })}
             </View>
+            <Pressable
+                onPress={() => onDeleteHabit && onDeleteHabit(habit.id)}
+                style={habitStyles.deleteButton}>
+                <Ionicons name="trash-outline" size={15} color="#EF4444" />
+            </Pressable>
         </View>
     );
 }
