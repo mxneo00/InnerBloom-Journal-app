@@ -27,7 +27,7 @@ export const habitStyles = StyleSheet.create({
     color: colors.textSecondary,
   },
 
-  /* ---------- Add Habit Button ---------- */
+  /* ---------- Habit Buttons ---------- */
   addHabitButton: {
     position: 'absolute',
     top: 18,
@@ -41,6 +41,12 @@ export const habitStyles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: colors.primaryDark,
+  },
+  deleteButton: {
+    marginLeft: 12,
+    padding: 2,
+    borderRadius: 8,
+    backgroundColor: colors.primaryExtraLight,
   },
 
   /* ---------- Section Headers ---------- */
@@ -82,8 +88,9 @@ export const habitStyles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: 12,
     paddingTop: 8,
-    paddingBottom: 6,
-    gap: 12.5,
+    paddingBottom: 2,
+    paddingRight: 42,
+    gap: 11,
   },
   dayHeaderText: {
     width: 18,
@@ -114,10 +121,9 @@ export const habitStyles = StyleSheet.create({
     alignItems: 'center',
     gap: 10.3,
   },
-
   dayBox: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
     borderRadius: 6,
     borderWidth: 1.5,
     borderColor: colors.border,
@@ -127,7 +133,6 @@ export const habitStyles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderColor: colors.primary,
   },
-
   weeklyBox: {
     width: 22,
     height: 22,
