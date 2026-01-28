@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAOVukhQUvcLd9Z3LI8JZ9Cp62614iVBtk",
-  authDomain: "innerbloom-c0269.firebaseapp.com",
-  projectId: "innerbloom-c0269",
-  storageBucket: "innerbloom-c0269.firebasestorage.app",
-  messagingSenderId: "429856608166",
-  appId: "1:429856608166:web:9c741de699b7dc4c6a0967"
+  apiKey: "AIzaSyAyKuHFyoADiwKQd27bEIt9uOIjjNnIhGk",
+  authDomain: "innerbloom-7d769.firebaseapp.com",
+  projectId: "innerbloom-7d769",
+  storageBucket: "innerbloom-7d769.firebasestorage.app",
+  messagingSenderId: "724292755257",
+  appId: "1:724292755257:web:d1a1d7a45b048e63f992e8"
 };
 
 const app = initializeApp(firebaseConfig);
