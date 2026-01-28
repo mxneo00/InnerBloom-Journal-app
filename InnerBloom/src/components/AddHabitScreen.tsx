@@ -22,7 +22,11 @@ export default function AddHabitScreen({ navigation }: Props) {
           await createHabit({ name, frequency });
           setName('');
           setFrequency('daily');
-          navigation.goBack();
+          if (navigation.canGoBack()) {
+            navigation.goBack();
+          } else {
+            navigation.navigate('HabitMain');
+          }
         } catch (error) {
           console.error('Error saving habit:', error);
         }

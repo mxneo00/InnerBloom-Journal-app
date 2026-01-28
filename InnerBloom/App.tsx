@@ -11,6 +11,7 @@ import NewEntryScreen from './src/components/NewEntryScreen';
 import { ViewEntryScreen } from './src/components/ViewEntryScreen';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import AddHabitScreen from './src/components/AddHabitScreen';
+import EditEntry from './src/components/EditEntry';
 import { Entry } from './src/types/entry';
 import { Habit } from './src/types/habit';
 import { subscribeToEntries } from './src/services/entriesService';
@@ -26,6 +27,7 @@ export type JournalStackParamList = {
   JournalMain: undefined;
   NewEntry: undefined;
   ViewEntry: { entry: Entry };
+  EditEntry: { entry: Entry};
 };
 
 export type HabitStackParamList = {
@@ -64,7 +66,10 @@ export default function App() {
         <journalStack.Screen name="NewEntry" options={{ title: 'New Journal Entry' }}>
           {(props) => <NewEntryScreen {...props} />}
         </journalStack.Screen>
-        <journalStack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'View Entry' }}/>
+        <journalStack.Screen name="ViewEntry" options={{ title: 'View Entry' }}>
+          {(props) => <ViewEntryScreen {...props} entries={entries} />}
+        </journalStack.Screen>
+        <journalStack.Screen name="EditEntry" component={EditEntry} options={{ title: 'Editing' }}/>
       </journalStack.Navigator>
     );
   }
