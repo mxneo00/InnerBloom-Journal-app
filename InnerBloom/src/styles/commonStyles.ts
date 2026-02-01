@@ -27,6 +27,12 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.textSecondary,
   },
+  prompt: {
+    fontSize: 18,
+    fontStyle: 'italic',
+    color: colors.textPrimary,
+    marginTop: 8,
+  },
 
   /* ---------- Card ---------- */
   card: {
