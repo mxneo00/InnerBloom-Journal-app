@@ -13,6 +13,8 @@ import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import AddHabitScreen from './src/components/AddHabitScreen';
 import EditEntry from './src/components/EditEntry';
 import LogInScreen from './src/screens/LogInScreen';
+import SignupScreen from './src/screens/SignupScreen';
+import SettingsScreen from './src/screens/Settings';
 import { Entry } from './src/types/entry';
 import { Habit } from './src/types/habit';
 import { subscribeToEntries } from './src/services/entriesService';
@@ -22,7 +24,7 @@ type TabParamList = {
   Home: undefined;
   Journal: undefined;
   HabitTracker: undefined;
-  LogIn: undefined;
+  Settings: undefined;
 };
 
 export type JournalStackParamList = {
@@ -37,9 +39,16 @@ export type HabitStackParamList = {
   AddHabit: undefined;
 }
 
+export type SettingsStackParamList = {
+  SettingsMain: undefined;
+  Signup: undefined;
+  Login: undefined;
+}
+
 const Tab = createBottomTabNavigator<TabParamList>();
 const journalStack = createNativeStackNavigator<JournalStackParamList>();
 const habitStack = createNativeStackNavigator<HabitStackParamList>();
+const settingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
 export default function App() {
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -89,6 +98,18 @@ export default function App() {
     );
   }
 
+  function SettingsStack() {
+    return (
+      <settingsStack.Navigator>
+        <settingsStack.Screen name="SettingsMain" options={{ headerShown: false }}>
+          {(props) => <SettingsScreen {...props} />}
+        </settingsStack.Screen>
+        <settingsStack.Screen name="Signup" component={SignupScreen} options={{ title: 'Sign Up' }}/>
+        <settingsStack.Screen name="Login" component={LogInScreen} options={{ title: 'Log In' }}/>
+      </settingsStack.Navigator>
+    );
+  }
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -113,7 +134,7 @@ export default function App() {
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Journal" component={JournalStack}/>
         <Tab.Screen name="HabitTracker" component={HabitStack}/>
-        <Tab.Screen name="LogIn" component={LogInScreen} />
+        <Tab.Screen name="Settings" component={SettingsStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );
