@@ -12,6 +12,7 @@ import { ViewEntryScreen } from './src/components/ViewEntry';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import AddHabitScreen from './src/components/AddHabitScreen';
 import EditEntry from './src/components/EditEntry';
+import LogInScreen from './src/screens/LogInScreen';
 import { Entry } from './src/types/entry';
 import { Habit } from './src/types/habit';
 import { subscribeToEntries } from './src/services/entriesService';
@@ -21,6 +22,7 @@ type TabParamList = {
   Home: undefined;
   Journal: undefined;
   HabitTracker: undefined;
+  LogIn: undefined;
 };
 
 export type JournalStackParamList = {
@@ -111,6 +113,7 @@ export default function App() {
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Journal" component={JournalStack}/>
         <Tab.Screen name="HabitTracker" component={HabitStack}/>
+        <Tab.Screen name="LogIn" component={LogInScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
