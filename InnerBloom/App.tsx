@@ -123,6 +123,8 @@ export default function App() {
               iconName = focused ? 'book' : 'book-outline';
             } else if (route.name === 'HabitTracker'){
               iconName = focused ? 'checkmark-circle' : 'checkmark-circle-outline'
+            } else if (route.name === 'Settings'){
+              iconName = focused ? 'settings' : 'settings-outline'
             }
             return <Ionicons name={iconName} size={size} color={color}/>;
           },
