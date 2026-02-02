@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMemo } from 'react';
-import { Text, View, Pressable, Alert } from 'react-native';
+import { Text, View, Pressable, Alert, ScrollView } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // SRC Imports
@@ -42,7 +42,7 @@ export function ViewEntryScreen({ navigation, route, entries }: Props) {
 
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View key={entry.id} style={styles.card}>
         <Text style={styles.title}>{entry.title}</Text>
         <Text style={styles.text}>{entry.content}</Text>
@@ -65,6 +65,6 @@ export function ViewEntryScreen({ navigation, route, entries }: Props) {
           <Text style={styles.deleteButtonText}>Delete</Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 }

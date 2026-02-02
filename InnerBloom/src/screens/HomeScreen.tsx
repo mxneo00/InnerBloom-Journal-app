@@ -5,6 +5,7 @@ import { Pressable, Text, View } from 'react-native';
 // SRC Imports
 import { styles } from '../styles/commonStyles';
 import { Mood } from '../types/mood';
+import { CheckInStreak } from '../types/checkInStreak';
 
 const MOODS: { key: Mood; emoji: string }[] = [
   { key: 'Happy', emoji: '😊' },
@@ -16,13 +17,26 @@ const MOODS: { key: Mood; emoji: string }[] = [
 
 export default function HomeScreen() {
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
+  const prompts = [
+    "What made you smile today?",
+    "Describe a challenge you overcame recently.",
+    "What are you grateful for right now?",
+    "Write about a memorable moment from this week.",
+    "What are your goals for the upcoming month?",
+  ];
+  const [streak, setStreak] = useState<number>(0); // Placeholder for check-in streak
 
+  // Get today's date in a readable format
   const today = new Date();
   const formattedDate = today.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   });
+
+  // Select today's prompt based on the date
+  const index = today.getDate() % prompts.length;
+  const todaysPrompt = prompts[index];
 
   return (
     <View style={styles.container}>
@@ -57,13 +71,14 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.card}>
-        {/* Options: Continue writing, Offer prompt */}
-        <Text style={styles.text}>WIP</Text>
+        {/* Prompt card */}
+        <Text style={styles.text}>Todays Reflection</Text>
+        <Text style={styles.prompt}>"{todaysPrompt}"</Text>
       </View>
       
       <View style={styles.card}>
         {/* Summary of habits or streaks  (Make functional) */}
-        <Text style={styles.text}>You've checked in # days in a row!</Text>
+        <Text style={styles.text}>You've checked in {streak} days in a row!</Text>
       </View>
 
     </View>

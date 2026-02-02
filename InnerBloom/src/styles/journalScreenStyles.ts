@@ -42,6 +42,15 @@ export const journalScreenStyles = StyleSheet.create({
   entryList: {
     paddingBottom: 24,
   },
+  searchInput: {
+    height: 40,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 8,
+    backgroundColor: colors.surface,
+    color: colors.textPrimary,
+  },
 
   /* ---------- Entry Inputs ---------- */
   journalEntryLabel: {

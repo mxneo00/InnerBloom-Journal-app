@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, FlatList, Pressable } from 'react-native';
+import React, { useMemo } from 'react';
+import { Text, View, FlatList, Pressable, TextInput } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // SRC Imports
@@ -18,6 +18,15 @@ type Props = {
 };
 
 export default function JournalScreen({ entries, navigation }: Props) {
+  const [searchQuery, setSearchQuery] = React.useState<string>('');
+
+  const filteredEntries = useMemo(() => {
+    return entries.filter((entry) =>
+      entry.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      entry.content.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [entries, searchQuery]);
+
   return (
     <View style={styles.container}>
       <View style={journalStyles.journalHeader}>
@@ -36,12 +45,17 @@ export default function JournalScreen({ entries, navigation }: Props) {
       {/* Search bar placeholder (Add filtering later) */}
       <View style={journalStyles.searchContainer}>
         {/* Search bar can be implemented here in the future */}
-        <Text style={styles.text}>Search bar WIP</Text>
+        <TextInput
+          style={journalStyles.searchInput}
+          placeholder="Search journal..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
       </View>
       
       {/* List of journal entries */}
       <FlatList 
-        data={entries}
+        data={filteredEntries}
         keyExtractor={(item) => item.id}
         contentContainerStyle = { journalStyles.entryList }
         ListEmptyComponent={() => (
