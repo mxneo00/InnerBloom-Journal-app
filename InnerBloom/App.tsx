@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -19,6 +19,8 @@ import { Entry } from './src/types/entry';
 import { Habit } from './src/types/habit';
 import { subscribeToEntries } from './src/services/entriesService';
 import { subscribeToHabits } from './src/services/habitsService';
+import { subscribeToAuthChanges } from './src/services/authService';
+import { User } from 'firebase/auth';
 
 type TabParamList = {
   Home: undefined;
@@ -53,20 +55,28 @@ const settingsStack = createNativeStackNavigator<SettingsStackParamList>();
 export default function App() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [habits, setHabits] = useState<Habit[]>([]);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const unsubscribeEntries = subscribeToEntries((fetchedEntries) => {
-      setEntries(fetchedEntries);
+    const unsub = subscribeToAuthChanges((u) => {
+      setUser(u);
+      if (!u) {
+        setEntries([]);
+        setHabits([]);
+      }
     });
+    return () => unsub();
+  }, []);
 
-    const unsubscribeHabits = subscribeToHabits((fetchedHabits) => {
-      setHabits(fetchedHabits);
-    });
+  useEffect(() => {
+    if (!user) return;
+    const unsubscribeEntries = subscribeToEntries(user.uid, setEntries);
+    const unsubscribeHabits = subscribeToHabits(user.uid, setHabits);
     return () => {
       unsubscribeEntries();
       unsubscribeHabits();
     };
-  }, []);
+  }, [user?.uid]);
 
   function JournalStack() {
     return (
