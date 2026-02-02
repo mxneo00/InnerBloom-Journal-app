@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Pressable, Text, View, TextInput } from 'react-native';
+import { Pressable, Text, View, TextInput, Alert } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // SRC Imports
@@ -18,8 +18,10 @@ export default function LogInScreen() {
         // Handle log in logic here
         try {
             const user = await login(email, password);
+            Alert.alert("Login successful!");
             console.log("Logged in user:", user);
         } catch (error) {
+            Alert.alert("Error logging in. Please check your credentials and try again.");
             console.error("Error logging in user:", error);
         }
     };

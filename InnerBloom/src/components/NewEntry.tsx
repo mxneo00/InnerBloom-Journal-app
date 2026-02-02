@@ -6,11 +6,17 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { styles } from '../styles/commonStyles';
 import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';
 import { createEntry } from '../services/entriesService';
+import { getCurrentUser } from '../services/authService';
 import { JournalStackParamList } from '../../App';
 
 type Props = NativeStackScreenProps<JournalStackParamList, 'NewEntry'>;
 
 export default function NewEntryScreen({ navigation }: Props) {
+  const user = getCurrentUser();
+  if (!user) {
+    throw new Error('User not authenticated');
+  }
+  
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   //const [createdAt, setCreatedAt] = useState('');
@@ -19,7 +25,7 @@ export default function NewEntryScreen({ navigation }: Props) {
     if (content.trim() === '') return;
 
     try {
-      await createEntry({ title, content });
+      await createEntry( user.uid, { title, content });
       setTitle('');
       setContent('');
       //setCreatedAt('');

@@ -7,10 +7,16 @@ import { styles } from '../styles/commonStyles';
 import { habitStyles as habitStyles } from '../styles/habitTrackerScreenStyles';
 import { HabitStackParamList } from '../../App';
 import { createHabit } from '../services/habitsService';
+import { getCurrentUser } from '../services/authService';
 
 type Props = NativeStackScreenProps<HabitStackParamList, 'AddHabit'>;;
 
 export default function AddHabitScreen({ navigation }: Props) {
+  const user = getCurrentUser();
+    if (!user) {
+      throw new Error('User not authenticated');
+    }
+  
   const [name, setName] = useState('');
   const [frequency, setFrequency] = useState<'daily' | 'weekly'>('daily');
 
@@ -19,7 +25,7 @@ export default function AddHabitScreen({ navigation }: Props) {
     if (!trimmed) return;
 
     try {
-          await createHabit({ name, frequency });
+          await createHabit(user.uid, { name, frequency });
           setName('');
           setFrequency('daily');
           if (navigation.canGoBack()) {

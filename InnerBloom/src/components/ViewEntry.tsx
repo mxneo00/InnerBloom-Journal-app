@@ -8,6 +8,7 @@ import { styles } from '../styles/commonStyles';
 import { JournalStackParamList } from '../../App';
 import { deleteEntry } from '../services/entriesService';
 import { Entry } from '../types/entry';
+import { getCurrentUser } from '../services/authService';
 
 type NavProps = NativeStackScreenProps<JournalStackParamList, 'ViewEntry'>;
 type Props = NavProps & {
@@ -15,6 +16,11 @@ type Props = NavProps & {
 };
 
 export function ViewEntryScreen({ navigation, route, entries }: Props) {
+  const user = getCurrentUser();
+    if (!user) {
+      throw new Error('User not authenticated');
+    }
+    
   const entryId = route.params.entry.id;
   const entry = useMemo(() => {
     return entries.find(e => e.id === entryId) ?? route.params.entry;
@@ -33,7 +39,7 @@ export function ViewEntryScreen({ navigation, route, entries }: Props) {
 
   const onDelete = async () => {
     try {
-      await deleteEntry(entry.id);
+      await deleteEntry(user.uid, entry.id);
       navigation.navigate('JournalMain');
     } catch (error) {
       console.error('Error deleting entry:', error);

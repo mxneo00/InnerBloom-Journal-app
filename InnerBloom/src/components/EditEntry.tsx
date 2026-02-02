@@ -7,10 +7,15 @@ import { styles } from '../styles/commonStyles';
 import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';
 import { updateEntry } from '../services/entriesService';
 import { JournalStackParamList } from '../../App';
+import { getCurrentUser } from '../services/authService';
 
 type Props = NativeStackScreenProps<JournalStackParamList, 'EditEntry'>;
 
 export default function EditEntry({ navigation, route }: Props) {
+  const user = getCurrentUser();
+    if (!user) {
+      throw new Error('User not authenticated');
+    }
   const { entry } = route.params;
 
   const [content, setContent] = useState(entry.content);
@@ -20,7 +25,7 @@ export default function EditEntry({ navigation, route }: Props) {
     if (content.trim() === '') return;
 
     try {
-        await updateEntry(entry.id, { 
+        await updateEntry(user.uid, entry.id, { 
             title: title.trim(), 
             content: content.trim() 
         });

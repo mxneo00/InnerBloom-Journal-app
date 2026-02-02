@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { habitStyles } from '../styles/habitTrackerScreenStyles';
 import type { Habit } from '../types/habit';
 import { deleteHabit } from '../services/habitsService';
+import { getCurrentUser } from '../services/authService';
 
 type Props = {
   habit: Habit;
@@ -14,11 +15,15 @@ type Props = {
 };
 
 export default function WeeklyHabitRow({ habit, checked, onToggleWeeklyCompletion }: Props) {
-  
+  const user = getCurrentUser();
+    if (!user) {
+      throw new Error('User not authenticated');
+    }
+    
   const handleDelete = () => {
     Alert.alert(
-      'Delete Entry',
-      'Are you sure you want to delete this entry?',
+      'Delete Habit',
+      'Are you sure you want to delete this habit?',
       [
         { text: 'Cancel', style: 'cancel' },
         { text: 'Delete', style: 'destructive', onPress: () => onDelete() },
@@ -28,9 +33,9 @@ export default function WeeklyHabitRow({ habit, checked, onToggleWeeklyCompletio
 
   const onDelete = async () => {
     try {
-      await deleteHabit(habit.id);
+      await deleteHabit(user.uid, habit.id);
     } catch (error) {
-      console.error('Error deleting entry:', error);
+      console.error('Error deleting habit:', error);
     }
   };
   

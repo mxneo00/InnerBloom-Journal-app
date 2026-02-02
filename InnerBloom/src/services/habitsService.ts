@@ -19,17 +19,16 @@ export interface UpdateHabit {
     frequency?: 'daily' | 'weekly';
 }
 
-const HABITS_COLLECTION = "habits";
+const habitsCollectionRef = (uid: string) => collection(db, "users", uid, "habits");
 
-export const createHabit = async (habit: NewHabit): Promise<string> => {
+export const createHabit = async (uid: string, habit: NewHabit): Promise<string> => {
     try{
-        const habitsCollectionRef = collection(db, HABITS_COLLECTION);
         const habitData = {
             name: habit.name,
             frequency: habit.frequency,
             createdAt: serverTimestamp(),
         };
-        const docRef = await addDoc(habitsCollectionRef, habitData);
+        const docRef = await addDoc(habitsCollectionRef(uid), habitData);
         console.log("Habit created with ID: ", docRef.id);
         return docRef.id;
     } catch (error) {
@@ -38,9 +37,9 @@ export const createHabit = async (habit: NewHabit): Promise<string> => {
     }
 };
 
-export const getHabitById = async (habitId: string): Promise<Habit | null> => {
+export const getHabitById = async (uid: string, habitId: string): Promise<Habit | null> => {
     try {
-        const habitDocRef = doc(db, HABITS_COLLECTION, habitId);
+        const habitDocRef = doc(db, "users", uid, "habits", habitId);
         const habitSnapshot = await getDoc(habitDocRef);
         if (!habitSnapshot.exists()) {
             console.log("No such habit!");
@@ -61,10 +60,9 @@ export const getHabitById = async (habitId: string): Promise<Habit | null> => {
     }
 };
 
-export const getAllHabits = async (): Promise<Habit[]> => {
+export const getAllHabits = async (uid: string): Promise<Habit[]> => {
     try {
-        const habitsCollectionRef = collection(db, HABITS_COLLECTION);
-        const habitsSnapshot = await getDocs(habitsCollectionRef);
+        const habitsSnapshot = await getDocs(habitsCollectionRef(uid));
         const habits: Habit[] = habitsSnapshot.docs.map((docSnapshot) => {
             const data = docSnapshot.data();
             return {
@@ -83,9 +81,9 @@ export const getAllHabits = async (): Promise<Habit[]> => {
     }
 };
 
-export const updateHabit = async (habitId: string, updates: UpdateHabit): Promise<void> => {
+export const updateHabit = async (uid: string, habitId: string, updates: UpdateHabit): Promise<void> => {
     try {
-        const habitDocRef = doc(db, HABITS_COLLECTION, habitId);
+        const habitDocRef = doc(db, "users", uid, "habits", habitId);
         const updateData: any = {
             ...updates,
             updatedAt: serverTimestamp(),
@@ -98,9 +96,9 @@ export const updateHabit = async (habitId: string, updates: UpdateHabit): Promis
     }
 };
 
-export const deleteHabit = async (habitId: string): Promise<void> => {
+export const deleteHabit = async (uid: string, habitId: string): Promise<void> => {
     try {
-        const habitDocRef = doc(db, HABITS_COLLECTION, habitId);
+        const habitDocRef = doc(db, "users", uid, "habits", habitId);
         await deleteDoc(habitDocRef);
         console.log("Habit deleted with ID: ", habitId);
     }
@@ -110,8 +108,8 @@ export const deleteHabit = async (habitId: string): Promise<void> => {
     }
 };
 
-export const subscribeToHabits = (callback: (habits: Habit[]) => void): (() => void) => {
-    const habitsCollectionRef = collection(db, HABITS_COLLECTION);
+export const subscribeToHabits = (uid: string, callback: (habits: Habit[]) => void): (() => void) => {
+    const habitsCollectionRef = collection(db, "users", uid, "habits");
     const q = query(habitsCollectionRef, orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const habits: Habit[] = querySnapshot.docs.map((docSnapshot) => {

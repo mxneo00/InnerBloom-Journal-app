@@ -3,7 +3,6 @@ import { Text, View, FlatList, Pressable, TextInput } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // SRC Imports
-import { Mood } from '../types/mood';
 import { JournalStackParamList } from '../../App';
 import { Entry } from '../types/entry';
 import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';

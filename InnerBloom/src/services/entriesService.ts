@@ -22,17 +22,16 @@ export interface UpdateEntryInput {
     //mood?: string;
 }
 
-const ENTRIES_COLLECTION = "entries";
+const entriesCollectionRef = (uid: string) => collection(db, "users", uid, "entries");
 
-export const createEntry = async (entry: NewEntryInput): Promise<string> => {
+export const createEntry = async (uid: string, entry: NewEntryInput): Promise<string> => {
     try{
-        const entriesCollectionRef = collection(db, ENTRIES_COLLECTION);
         const entryData = {
             title: entry.title,
             content: entry.content,
             createdAt: serverTimestamp(),
         };
-        const docRef = await addDoc(entriesCollectionRef, entryData);
+        const docRef = await addDoc(entriesCollectionRef(uid), entryData);
         console.log("Entry created with ID: ", docRef.id);
         return docRef.id;
     } catch (error) {
@@ -41,9 +40,9 @@ export const createEntry = async (entry: NewEntryInput): Promise<string> => {
     }
 };
 
-export const getEntryById = async (entryId: string): Promise<Entry | null> => {
+export const getEntryById = async (uid: string, entryId: string): Promise<Entry | null> => {
     try {
-        const entryDocRef = doc(db, ENTRIES_COLLECTION, entryId);
+        const entryDocRef = doc(db, "users", uid, "entries", entryId);
         const entrySnapshot = await getDoc(entryDocRef);
         if (!entrySnapshot.exists()) {
             console.log("No such entry!");
@@ -64,9 +63,9 @@ export const getEntryById = async (entryId: string): Promise<Entry | null> => {
     }
 };
 
-export const getAllEntries = async (): Promise<Entry[]> => {
+export const getAllEntries = async (uid: string): Promise<Entry[]> => {
     try {
-        const entriesQuery = query(collection(db, ENTRIES_COLLECTION), orderBy("createdAt", "desc"));
+        const entriesQuery = query(entriesCollectionRef(uid), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(entriesQuery);
         const entries: Entry[] = querySnapshot.docs.map((docSnapshot) => {
             const data = docSnapshot.data();
@@ -86,9 +85,9 @@ export const getAllEntries = async (): Promise<Entry[]> => {
     }
 };
 
-export const updateEntry = async (entryId: string, updates: UpdateEntryInput): Promise<void> => {
+export const updateEntry = async (uid: string, entryId: string, updates: UpdateEntryInput): Promise<void> => {
     try {
-        const entryDocRef = doc(db, ENTRIES_COLLECTION, entryId);
+        const entryDocRef = doc(db, "users", uid, "entries", entryId);
         const updateData: any = {
             ...updates,
             updatedAt: serverTimestamp(),
@@ -101,9 +100,9 @@ export const updateEntry = async (entryId: string, updates: UpdateEntryInput): P
     }
 };
 
-export const deleteEntry = async (entryId: string): Promise<void> => {
+export const deleteEntry = async (uid: string, entryId: string): Promise<void> => {
     try {
-        const entryDocRef = doc(db, ENTRIES_COLLECTION, entryId);
+        const entryDocRef = doc(db, "users", uid, "entries", entryId);
         await deleteDoc(entryDocRef);
         console.log("Entry deleted with ID: ", entryId);
     } catch (error) {
@@ -113,9 +112,10 @@ export const deleteEntry = async (entryId: string): Promise<void> => {
 };
 
 export const subscribeToEntries = (
+    uid: string,
     callback: (entries: Entry[]) => void): (() => void) => {
     const entriesQuery = query(
-        collection(db, ENTRIES_COLLECTION),
+        entriesCollectionRef(uid),
         orderBy("createdAt", "desc")
     );
     const unsubscribe = onSnapshot(entriesQuery, (querySnapshot) => {
