@@ -5,6 +5,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 // SRC Imports
 import { styles } from '../styles/commonStyles';
 import { SettingsStackParamList } from '../../App';
+import { logout } from '../services/authService';
 
 type Props = {
   navigation: NativeStackNavigationProp<
@@ -14,9 +15,11 @@ type Props = {
 };
 
 export default function SettingsScreen({ navigation }: Props) {
-
   const handleLogOut = () => {
     // Implement log out functionality here
+    logout().then(() => {
+      navigation.navigate('Login');
+    });
     console.log("User logged out");
   };
 
