@@ -5,6 +5,7 @@ export interface User {
     id: string;
     username: string;
     email: string;
+    password: string;
 }
 
 const USERS_COLLECTION = "users";
@@ -15,6 +16,7 @@ export const createUser = async (user: Omit<User, 'id'>): Promise<string> => {
         const userData = {
             username: user.username,
             email: user.email,
+            password: user.password,
             createdAt: serverTimestamp(),
         };
         const docRef = await addDoc(usersCollectionRef, userData);
@@ -39,6 +41,7 @@ export const getUserById = async (userId: string): Promise<User | null> => {
             id: userSnapshot.id,
             username: data.username,
             email: data.email,
+            password: data.password,
         };
         return user;
     } catch (error) {
@@ -79,6 +82,7 @@ export const getAllUsers = async (): Promise<User[]> => {
                 id: docSnapshot.id,
                 username: data.username,
                 email: data.email,
+                password: data.password,
             };
         }
         );
@@ -105,6 +109,7 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
             id: docSnapshot.id,
             username: data.username,
             email: data.email,
+            password: data.password,
         };
         return user;
     } catch (error) {
@@ -126,6 +131,7 @@ export const onUserChange = (userId: string, callback: (user: User | null) => vo
             id: docSnapshot.id,
             username: data.username,
             email: data.email,
+            password: data.password,
         };
         callback(user);
     }, (error) => {
