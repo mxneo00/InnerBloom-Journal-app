@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import { Pressable, Text, View, TextInput, ScrollView } from 'react-native';
+import { Pressable, Text, View, TextInput, ScrollView, Alert } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // SRC Imports
 import { styles } from '../styles/commonStyles';
-import { createUser } from '../services/userService';
 import { SettingsStackParamList } from '../../App';
+import { signup } from '../services/authService';
 
 type Props = NativeStackScreenProps<SettingsStackParamList, 'Signup'>;
 
@@ -17,9 +17,16 @@ export default function SignupScreen() {
 
     const handleSignup = async () => {
         // Handle signup logic here
+        if (!email || !password) {
+            Alert.alert("Email and password are required for signup.");
+            return;
+        }
         try {
-            await createUser({username, email,  password});
+            await signup(email, password);
+            console.log("User created successfully");
+            Alert.alert("Signup successful! You can now log in.");
         } catch (error) {
+            Alert.alert("Error creating user. Please try again.");
             console.error("Error creating user:", error);
         }
     };
