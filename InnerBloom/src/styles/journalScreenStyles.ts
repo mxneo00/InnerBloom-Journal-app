@@ -68,4 +68,9 @@ export const journalScreenStyles = StyleSheet.create({
     backgroundColor: colors.surface,
     color: colors.textPrimary,
   },
+  journalEntryDate: {
+    marginBottom: 8,
+    fontSize: 12,
+    color: colors.textMuted,
+  },
 });

@@ -13,14 +13,16 @@ type Props = NativeStackScreenProps<JournalStackParamList, 'NewEntry'>;
 export default function NewEntryScreen({ navigation }: Props) {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
+  const [createdAt, setCreatedAt] = useState('');
 
   const handleSave = async () => {
     if (content.trim() === '') return;
 
     try {
-      await createEntry({ title, content });
+      await createEntry({ title, content, createdAt: new Date() });
       setTitle('');
       setContent('');
+      setCreatedAt('');
       if (navigation.canGoBack()) {
         navigation.goBack();
       } else {

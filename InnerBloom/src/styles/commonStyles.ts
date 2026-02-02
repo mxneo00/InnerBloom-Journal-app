@@ -33,6 +33,10 @@ export const styles = StyleSheet.create({
     color: colors.textPrimary,
     marginTop: 8,
   },
+  linkText: {
+    color: colors.link,
+    textDecorationLine: 'underline',
+  },
 
   /* ---------- Card ---------- */
   card: {
