@@ -7,8 +7,8 @@ import { Ionicons } from '@expo/vector-icons';
 // SRC Imports
 import HomeScreen from './src/screens/HomeScreen';
 import JournalScreen from './src/screens/JournalScreen';
-import NewEntryScreen from './src/components/NewEntryScreen';
-import { ViewEntryScreen } from './src/components/ViewEntryScreen';
+import NewEntryScreen from './src/components/NewEntry';
+import { ViewEntryScreen } from './src/components/ViewEntry';
 import HabitTrackerScreen from './src/screens/HabitTrackerScreen';
 import AddHabitScreen from './src/components/AddHabitScreen';
 import EditEntry from './src/components/EditEntry';
