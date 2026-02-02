@@ -63,6 +63,16 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     color: colors.textPrimary,
   },
+  shortInput: {
+    height: 40,
+    padding: 12,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: colors.border, 
+    borderRadius: 8,
+    backgroundColor: colors.surface,
+    color: colors.textPrimary,
+  },
 
   /* ---------- Buttons ---------- */
   buttonContainer: {

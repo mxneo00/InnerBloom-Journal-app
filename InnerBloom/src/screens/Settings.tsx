@@ -6,6 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from '../styles/commonStyles';
 import { SettingsStackParamList } from '../../App';
 
+
 type Props = {
   navigation: NativeStackNavigationProp<
     SettingsStackParamList,
@@ -13,7 +14,13 @@ type Props = {
   >;
 };
 
-export default function SettingsScreen({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
+export default function SettingsScreen({ navigation }: Props) {
+
+  const handleLogOut = () => {
+    // Implement log out functionality here
+    console.log("User logged out");
+  };
+  
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -24,6 +31,9 @@ export default function SettingsScreen({ navigation }: { navigation: NativeStack
         </Pressable>
         <Pressable style={styles.saveButton} onPress={() => navigation.navigate('Login')}>
             <Text style={styles.buttonText}>Go to Log In</Text>
+        </Pressable>
+        <Pressable style={styles.saveButton} onPress={handleLogOut}>
+            <Text style={styles.buttonText}>LogOut</Text>
         </Pressable>
       </View>
     </View>
