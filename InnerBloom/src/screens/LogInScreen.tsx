@@ -11,13 +11,13 @@ import { login } from '../services/authService';
 type LogInScreenProps = NativeStackScreenProps<SettingsStackParamList, 'Login'>;
 
 export default function LogInScreen() {
-    const [username, setUsername] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
     const handleLogIn = async () => {
         // Handle log in logic here
         try {
-            const user = await login(username, password);
+            const user = await login(email, password);
             console.log("Logged in user:", user);
         } catch (error) {
             console.error("Error logging in user:", error);
@@ -30,9 +30,9 @@ export default function LogInScreen() {
                 <Text style={styles.title}>Log In</Text>
                 {/* Username and Password Input Fields would go here */}
                 <TextInput
-                    placeholder="Username"
-                    value={username}
-                    onChangeText={setUsername}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={setEmail}
                     style={styles.shortInput}
                 />
                 <TextInput
