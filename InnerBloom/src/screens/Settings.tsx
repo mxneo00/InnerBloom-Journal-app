@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
-import { Text, View, FlatList, Pressable, Settings } from 'react-native';
+import { Text, View, Pressable, Settings, ScrollView } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // SRC Imports
 import { styles } from '../styles/commonStyles';
 import { SettingsStackParamList } from '../../App';
-
 
 type Props = {
   navigation: NativeStackNavigationProp<
@@ -20,9 +19,9 @@ export default function SettingsScreen({ navigation }: Props) {
     // Implement log out functionality here
     console.log("User logged out");
   };
-  
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.card}>
         <Text style={styles.title}>Settings</Text>
         {/* Settings options would go here */}
@@ -36,6 +35,6 @@ export default function SettingsScreen({ navigation }: Props) {
             <Text style={styles.buttonText}>LogOut</Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 }
