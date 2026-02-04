@@ -64,10 +64,10 @@ export default function AddHabitScreen({ navigation }: Props) {
           <Pressable 
             onPress={handleAddHabit}
             style={({pressed}) => [
-              styles.saveButton,
+              styles.primaryButton,
               pressed && styles.buttonPressed,
             ]}>
-              <Text style={styles.saveButtonText}>Add Habit</Text>
+              <Text style={styles.primaryButtonText}>Add Habit</Text>
           </Pressable>
         </View>
     </View>

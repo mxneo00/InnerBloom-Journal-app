@@ -46,8 +46,8 @@ export default function LogInScreen() {
                 />
             </View>
             <View style={styles.buttonContainer}>
-                <Pressable style={styles.saveButton} onPress={handleLogIn}>
-                    <Text style={styles.buttonText}>Log In</Text>
+                <Pressable style={styles.primaryButton} onPress={handleLogIn}>
+                    <Text style={styles.primaryButtonText}>Log In</Text>
                 </Pressable>
             </View>
         </View>

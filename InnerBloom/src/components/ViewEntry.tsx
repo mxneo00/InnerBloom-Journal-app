@@ -57,18 +57,18 @@ export function ViewEntryScreen({ navigation, route, entries }: Props) {
         <Pressable
           onPress={() => navigation.navigate('EditEntry', { entry })}
           style={({ pressed }) => [
-            styles.editButton,
+            styles.lightButton,
             pressed && styles.buttonPressed,
           ]}>
-          <Text style={styles.editButtonText}>Edit</Text>
+          <Text style={styles.lightButtonText}>Edit</Text>
         </Pressable>
         <Pressable 
           onPress={handleDelete}
           style={({ pressed }) => [
-            styles.deleteButton,
+            styles.darkButton,
             pressed && styles.buttonPressed,
           ]}>
-          <Text style={styles.deleteButtonText}>Delete</Text>
+          <Text style={styles.darkButtonText}>Delete</Text>
         </Pressable>
       </View>
     </ScrollView>

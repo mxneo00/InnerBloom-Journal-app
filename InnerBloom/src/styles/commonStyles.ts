@@ -44,7 +44,6 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 18,
     marginBottom: 24,
-
     shadowColor: colors.primaryDark,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.12,
@@ -84,19 +83,19 @@ export const styles = StyleSheet.create({
   buttonPressed: {
     opacity: 0.7,
   },
-  deleteButton: {
+  darkButton: {
     backgroundColor: colors.primaryDark,
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
     alignItems: 'center',
   },
-  deleteButtonText: {
+  darkButtonText: {
     color: colors.textSecondary,
     fontSize: 16,
     fontWeight: '600',
   },
-  editButton: {
+  lightButton: {
     backgroundColor: colors.primaryExtraLight,
     paddingVertical: 12,
     paddingHorizontal: 20,
@@ -104,19 +103,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
   },
-  editButtonText: {
+  lightButtonText: {
     color: colors.textPrimary,
     fontSize: 16,
     fontWeight: '600',
   },
-  saveButton: {
+  primaryButton: {
     backgroundColor: colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
     alignItems: 'center',
   },
-  saveButtonText: {
+  primaryButtonText: {
     color: colors.textPrimary,
     fontSize: 16,
     fontWeight: '600',
