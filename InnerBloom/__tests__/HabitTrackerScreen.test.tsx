@@ -1,11 +1,23 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import HabitTrackerScreen from '../src/screens/HabitTrackerScreen';
+import { Alert } from 'react-native';
+import { getCurrentUser } from '../src/services/authService';
 
 // Mock the auth service
-jest.mock('../src/services/authService', () => ({
-  getCurrentUser: jest.fn(() => ({ uid: 'test-user-123' })),
+const mockOnAuthStateChanged = jest.fn();
+const mockGetAuth = { currentUser: null as any };
+
+jest.mock('firebase/auth', () => ({
+  getAuth: () => mockGetAuth,
+  onAuthStateChanged: (...args: any[]) => mockOnAuthStateChanged(...args),
 }));
+
+jest.mock('../src/services/authService', () => ({
+  getCurrentUser: jest.fn(),
+}));
+
+const mockGetCurrentUser = getCurrentUser as jest.Mock;
 
 // Create mock navigation
 const createMockNavigation = () => ({
@@ -39,7 +51,9 @@ const mockHabits = [
         createdAt: new Date().toISOString(),
         userId: 'test-user-123',
     },
-]
+];
+
+jest.spyOn(Alert, 'alert').mockImplementation(() => {});
 
 describe('HabitTrackerScreen', () => {
     let mockNavigation: ReturnType<typeof createMockNavigation>;
@@ -48,7 +62,19 @@ describe('HabitTrackerScreen', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         mockNavigation = createMockNavigation();
+
+        setAuthState({ uid: 'test-user-123' });
     });
+
+    const setAuthState = (user: any | null) => {
+        mockGetAuth.currentUser = user;
+
+        mockOnAuthStateChanged.mockImplementation((_auth: any, callback: any) => {
+            callback(user);
+            return () => {};
+        });
+        mockGetCurrentUser.mockReturnValue(user);
+    };
 
     it('renders the habit tracker header', () => {
         render(
@@ -64,12 +90,34 @@ describe('HabitTrackerScreen', () => {
         expect(screen.getByText(/\d{4}-\d{2}-\d{2}\s:\s\d{4}-\d{2}-\d{2}/)).toBeTruthy();
     });
 
-    it('navigates to AddHabitScreen on add button press', () => {
+    it('logged in: navigates to AddHabitScreen on add button press', () => {
+        setAuthState({ uid: 'test-user-123' });
         render(
             <HabitTrackerScreen habits={mockHabits} setHabits={mockSetHabits} navigation={mockNavigation as any}/>
         );
         fireEvent.press(screen.getByText('+ Add Habit'));
         expect(mockNavigation.navigate).toHaveBeenCalledWith('AddHabit')
+    });
+
+    it('logged out: shows alert and does not navigate on add button press', () => {
+        mockGetAuth.currentUser = null;
+        mockOnAuthStateChanged.mockImplementation((_auth: any, callback: any) => {
+            callback(null);
+            return () => {};
+        });
+        mockGetCurrentUser.mockReturnValue({ uid: 'test-user-123' });
+        render(
+            <HabitTrackerScreen habits={mockHabits} setHabits={mockSetHabits} navigation={mockNavigation as any}/>
+        );
+        fireEvent.press(screen.getByText('+ Add Habit'));
+        expect(Alert.alert).toHaveBeenCalledTimes(1);
+        expect(Alert.alert).toHaveBeenCalledWith(
+            'Log in required',
+            'Please log in to add a new habit.',
+            [
+            { text: 'Cancel', style: 'cancel'},
+            ]
+        );
     });
 
     it('renders the habit tracker screen with habits', () => {

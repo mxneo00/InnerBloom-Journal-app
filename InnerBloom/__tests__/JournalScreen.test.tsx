@@ -1,10 +1,15 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import JournalScreen from '../src/screens/JournalScreen';
+import { Alert } from 'react-native';
 
 // Mock the auth service
-jest.mock('../src/services/authService', () => ({
-  getCurrentUser: jest.fn(() => ({ uid: 'test-user-123' })),
+const mockOnAuthStateChanged = jest.fn();
+const mockGetAuth = { currentUser: null as any };
+
+jest.mock('firebase/auth', () => ({
+  getAuth: () => mockGetAuth,
+  onAuthStateChanged: (...args: any[]) => mockOnAuthStateChanged(...args),
 }));
 
 // Create mock navigation
@@ -41,6 +46,8 @@ const mockEntries = [
     },
 ];
 
+jest.spyOn(Alert, 'alert').mockImplementation(() => {});
+
 describe('JournalScreen', () => {
     let mockNavigation: ReturnType<typeof createMockNavigation>;
 
@@ -48,6 +55,15 @@ describe('JournalScreen', () => {
         jest.clearAllMocks();
         mockNavigation = createMockNavigation();
     });
+
+    const setAuthState = (user: any | null) => {
+        mockGetAuth.currentUser = user;
+
+        mockOnAuthStateChanged.mockImplementation((_auth: any, callback: any) => {
+            callback(user);
+            return () => {};
+        });
+    };
 
     it('renders the header correctly', () => {
         render(<JournalScreen entries={mockEntries} navigation={mockNavigation as any} />);
@@ -61,10 +77,26 @@ describe('JournalScreen', () => {
         expect(screen.getByText('Second Entry')).toBeTruthy();
     });
 
-    it('navigates to NewEntry screen on add button press', () => {
+    it('logged in: navigates to NewEntry screen on add button press', () => {
+        setAuthState({ uid: 'test-user-123' });
         render(<JournalScreen entries={mockEntries} navigation={mockNavigation as any} />);
         fireEvent.press(screen.getByText('+'));
         expect(mockNavigation.navigate).toHaveBeenCalledWith('NewEntry');
+    });
+
+    it('logged out: shows alert and does not navigate on add button press', () => {
+        setAuthState(null);
+        render(<JournalScreen entries={mockEntries} navigation={mockNavigation as any} />);
+        fireEvent.press(screen.getByText('+'));
+
+        expect(Alert.alert).toHaveBeenCalledTimes(1);
+        expect(Alert.alert).toHaveBeenCalledWith(
+            'Log in required',
+            'Please log in to add a new entry.',
+            [
+            { text: 'Cancel', style: 'cancel'},
+            ]
+        );
     });
 
     it('filters entries based on search query', () => {

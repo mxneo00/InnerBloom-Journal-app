@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
-import { Text, View, FlatList, Pressable, TextInput } from 'react-native';
+import React, {  useState, useMemo, useEffect } from 'react';
+import { Text, View, FlatList, Pressable, TextInput, Alert } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 
 // SRC Imports
 import { JournalStackParamList } from '../../App';
@@ -17,7 +18,15 @@ type Props = {
 };
 
 export default function JournalScreen({ entries, navigation }: Props) {
-  const [searchQuery, setSearchQuery] = React.useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const auth = getAuth();
+  const [user, setUser] = useState<User | null>(auth.currentUser);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, setUser);
+    return unsub;
+  }, [auth]);
 
   const filteredEntries = useMemo(() => {
     return entries.filter((entry) =>
@@ -25,6 +34,20 @@ export default function JournalScreen({ entries, navigation }: Props) {
       entry.content.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [entries, searchQuery]);
+
+  const handleAddPress = () => {
+    if (!user) {
+      Alert.alert(
+        'Log in required',
+        'Please log in to add a new entry.',
+        [
+          { text: 'Cancel', style: 'cancel'},
+        ]
+      );
+      return;
+    }
+    navigation.navigate('NewEntry')
+  }
 
   return (
     <View style={styles.container}>
@@ -36,7 +59,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
         </View>
 
         {/* Add new entry button */}
-        <Pressable onPress={() => navigation.navigate('NewEntry')} style={journalStyles.addButton}>
+        <Pressable onPress={handleAddPress} style={journalStyles.addButton}>
           <Text style={journalStyles.addButtonText}>+</Text>
         </Pressable>
       </View>
