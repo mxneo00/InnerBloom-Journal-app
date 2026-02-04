@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
-import { ScrollView, Pressable, Text, View } from 'react-native';
+import React, { useMemo, useState, useEffect } from 'react';
+import { ScrollView, Pressable, Text, View, Alert } from 'react-native';
 import type { Dispatch, SetStateAction } from 'react';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 
 // SRC Imports
 import { styles } from '../styles/commonStyles';
@@ -49,6 +50,14 @@ export default function HabitTrackerScreen({ habits, setHabits, navigation }: Pr
   const dailyHabits = habits.filter((h) => h.frequency === 'daily');
   const weeklyHabits = habits.filter((h) => h.frequency === 'weekly');
 
+  const auth = getAuth();
+  const [user, setUser] = useState<User | null>(auth.currentUser);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, setUser);
+    return unsub;
+  }, [auth]);
+
   const onToggleDailyCompletion = (habitId: string, dateKey: string) => {
     setHabits((prev) =>
       prev.map((h) => {
@@ -74,6 +83,20 @@ export default function HabitTrackerScreen({ habits, setHabits, navigation }: Pr
     );
   };
 
+  const handleAddPress = () => {
+      if (!user) {
+        Alert.alert(
+          'Log in required',
+          'Please log in to add a new habit.',
+          [
+            { text: 'Cancel', style: 'cancel'},
+          ]
+        );
+        return;
+      }
+      navigation.navigate('AddHabit')
+    }
+
   return (
     <View style={styles.container}>
       {/* Header Section */}
@@ -81,7 +104,7 @@ export default function HabitTrackerScreen({ habits, setHabits, navigation }: Pr
         <Text style={habitStyles.habitHeaderText}>This Weeks Habits</Text>
         <Text style={habitStyles.daterange}>{weekDateKeys[0]} : {weekDateKeys[6]}</Text>
         {/*<Text style={habitStyles.progress}>Progress: 12/21</Text>*/}
-        <Pressable onPress={() => navigation.navigate('AddHabit')} style={habitStyles.addHabitButton}>
+        <Pressable onPress={handleAddPress} style={habitStyles.addHabitButton}>
           <Text style={habitStyles.addHabitButtonText}>+ Add Habit</Text>
         </Pressable>
       </View>

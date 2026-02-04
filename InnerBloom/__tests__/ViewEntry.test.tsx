@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import { ViewEntryScreen } from '../src/components/ViewEntry';
 import { Alert } from 'react-native';
-import { exp } from 'firebase/firestore/pipelines';
 
 // Mock the auth service
 jest.mock('../src/services/authService', () => ({
