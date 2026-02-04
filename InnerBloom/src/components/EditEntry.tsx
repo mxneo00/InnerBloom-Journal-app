@@ -60,10 +60,10 @@ export default function EditEntry({ navigation, route }: Props) {
           <Pressable 
             onPress={handleSave}
             style={({pressed}) => [
-              styles.saveButton,
+              styles.primaryButton,
               pressed && styles.buttonPressed,
             ]}>
-              <Text style={styles.saveButtonText}>Save Entry</Text>
+              <Text style={styles.primaryButtonText}>Save Entry</Text>
           </Pressable>
       </View>
     </View>
