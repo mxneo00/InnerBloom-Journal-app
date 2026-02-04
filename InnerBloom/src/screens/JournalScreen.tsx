@@ -1,9 +1,9 @@
-import React from 'react';
-import { Text, View, FlatList, Pressable } from 'react-native';
+import React, {  useState, useMemo, useEffect } from 'react';
+import { Text, View, FlatList, Pressable, TextInput, Alert } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 
 // SRC Imports
-import { Mood } from '../types/mood';
 import { JournalStackParamList } from '../../App';
 import { Entry } from '../types/entry';
 import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';
@@ -18,6 +18,37 @@ type Props = {
 };
 
 export default function JournalScreen({ entries, navigation }: Props) {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const auth = getAuth();
+  const [user, setUser] = useState<User | null>(auth.currentUser);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, setUser);
+    return unsub;
+  }, [auth]);
+
+  const filteredEntries = useMemo(() => {
+    return entries.filter((entry) =>
+      entry.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      entry.content.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [entries, searchQuery]);
+
+  const handleAddPress = () => {
+    if (!user) {
+      Alert.alert(
+        'Log in required',
+        'Please log in to add a new entry.',
+        [
+          { text: 'Cancel', style: 'cancel'},
+        ]
+      );
+      return;
+    }
+    navigation.navigate('NewEntry')
+  }
+
   return (
     <View style={styles.container}>
       <View style={journalStyles.journalHeader}>
@@ -28,7 +59,7 @@ export default function JournalScreen({ entries, navigation }: Props) {
         </View>
 
         {/* Add new entry button */}
-        <Pressable onPress={() => navigation.navigate('NewEntry')} style={journalStyles.addButton}>
+        <Pressable onPress={handleAddPress} style={journalStyles.addButton}>
           <Text style={journalStyles.addButtonText}>+</Text>
         </Pressable>
       </View>
@@ -36,12 +67,17 @@ export default function JournalScreen({ entries, navigation }: Props) {
       {/* Search bar placeholder (Add filtering later) */}
       <View style={journalStyles.searchContainer}>
         {/* Search bar can be implemented here in the future */}
-        <Text style={styles.text}>Search bar WIP</Text>
+        <TextInput
+          style={journalStyles.searchInput}
+          placeholder="Search journal..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
       </View>
       
       {/* List of journal entries */}
       <FlatList 
-        data={entries}
+        data={filteredEntries}
         keyExtractor={(item) => item.id}
         contentContainerStyle = { journalStyles.entryList }
         ListEmptyComponent={() => (

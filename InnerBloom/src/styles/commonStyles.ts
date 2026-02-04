@@ -27,6 +27,16 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.textSecondary,
   },
+  prompt: {
+    fontSize: 18,
+    fontStyle: 'italic',
+    color: colors.textPrimary,
+    marginTop: 8,
+  },
+  linkText: {
+    color: colors.link,
+    textDecorationLine: 'underline',
+  },
 
   /* ---------- Card ---------- */
   card: {
@@ -53,6 +63,16 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     color: colors.textPrimary,
   },
+  shortInput: {
+    height: 40,
+    padding: 12,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: colors.border, 
+    borderRadius: 8,
+    backgroundColor: colors.surface,
+    color: colors.textPrimary,
+  },
 
   /* ---------- Buttons ---------- */
   buttonContainer: {
@@ -60,6 +80,34 @@ export const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 24,
+  },
+  buttonPressed: {
+    opacity: 0.7,
+  },
+  deleteButton: {
+    backgroundColor: colors.primaryDark,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  deleteButtonText: {
+    color: colors.textSecondary,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  editButton: {
+    backgroundColor: colors.primaryExtraLight,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  editButtonText: {
+    color: colors.textPrimary,
+    fontSize: 16,
+    fontWeight: '600',
   },
   saveButton: {
     backgroundColor: colors.primary,
@@ -72,9 +120,6 @@ export const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: 16,
     fontWeight: '600',
-  },
-  buttonPressed: {
-    opacity: 0.7,
   },
 
   /* ---------- Mood Picker ---------- */

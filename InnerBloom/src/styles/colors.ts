@@ -12,6 +12,7 @@ export const colors = {
   textSecondary: '#374151',
   textMuted: '#6B7280',
   textDisabled: '#9CA3AF',
+  link: '#3B82F6',
 
   /* ---------- Backgrounds ---------- */
   background: '#FFFFFF',
@@ -26,4 +27,5 @@ export const colors = {
   success: '#10B981',
   warning: '#F59E0B',
   danger: '#EF4444',
+  
 };

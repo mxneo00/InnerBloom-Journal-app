@@ -33,11 +33,11 @@ This app combines journaling and habit tracking into a single, easy-to-use mobil
 ### Tech Stack
 
 - **Framework:** React Native with Expo  
-- **Navigation:** Expo Router / React Navigation *(TBD)*  
-- **State Management:** React Context / Zustand / Redux *(TBD)*  
-- **Backend / Storage:** AsyncStorage / Firebase / Supabase *(TBD)*  
+- **Navigation:** React Navigation  
+- **State Management:** React Context  
+- **Backend / Storage:** Firebase   
 - **External APIs:** TBD  
-- **Key Libraries:** TBD (e.g., `expo-image-picker`, `expo-calendar`)
+- **Key Libraries:** react-navigation/* (More planned)
 
 ---
 
@@ -49,6 +49,7 @@ This app combines journaling and habit tracking into a single, easy-to-use mobil
 3. **New Entry** – Create a new journal entry  
 4. **Habit Tracker** – Create and manage custom habits  
 
+Navigation is implemented using a combination of stack and tab navigation.
 ---
 
 ## 🗂️ Data Model (Planned) **(WIP)**
@@ -57,7 +58,7 @@ This app combines journaling and habit tracking into a single, easy-to-use mobil
   - id
   - title
   - content
-  - date
+  - date (not fully implemented)
   - mood (optional)
   - category (optional)
 
@@ -65,7 +66,7 @@ This app combines journaling and habit tracking into a single, easy-to-use mobil
   - id
   - name
   - frequency
-  - completion status
+  - completion status (not implemented)
 
 ---
 
@@ -77,6 +78,7 @@ This app combines journaling and habit tracking into a single, easy-to-use mobil
 - Habit tracking system
 
 ### Stretch Features (Nice-to-Have)
+- Log in system
 - Image attachments in journal entries
 - Calendar view
 - Mood tracking
@@ -104,8 +106,8 @@ This app combines journaling and habit tracking into a single, easy-to-use mobil
 **Notes:**  
 Migrated content from original coding assignment to preserve progress.
 
-#### Class 2
-**Status:** 🚧 In Progress  
+#### Class 2 (1/21/26 - 1/25/26)
+**Status:** ✅ Complete  
 **Goals:**
 - Build reusable UI components
 - Apply app theme (colors, typography)
@@ -118,14 +120,14 @@ Migrated content from original coding assignment to preserve progress.
 
 **Focus:** Core features and data management
 
-#### Class 3
-**Status:** ⏳ Not Started  
+#### Class 3 (1/26/26 - 1/28/26)
+**Status:** ✅ Complete   
 - State management setup  
 - Data storage implementation  
 - First core feature integration  
 
 #### Class 4
-**Status:** ⏳ Not Started  
+**Status:** 🚧 In Progress  
 - Second core feature  
 - CRUD operations  
 - Input validation & persistence  

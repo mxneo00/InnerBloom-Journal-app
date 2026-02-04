@@ -1,30 +1,42 @@
 import React, { useState } from 'react';
-import { Button, TextInput, View, Pressable, Text } from 'react-native';
+import { TextInput, View, Pressable, Text } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // SRC Imports
-import { Entry } from '../types/entry';
 import { styles } from '../styles/commonStyles';
 import { journalScreenStyles as journalStyles } from '../styles/journalScreenStyles';
+import { createEntry } from '../services/entriesService';
+import { getCurrentUser } from '../services/authService';
+import { JournalStackParamList } from '../../App';
 
-type Props = {
-  entries: Entry[];
-  setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
-};
+type Props = NativeStackScreenProps<JournalStackParamList, 'NewEntry'>;
 
-export default function NewEntryScreen({ entries, setEntries }: Props) {
+export default function NewEntryScreen({ navigation }: Props) {
+  const user = getCurrentUser();
+  if (!user) {
+    throw new Error('User not authenticated');
+  }
+  
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
+  //const [createdAt, setCreatedAt] = useState('');
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (content.trim() === '') return;
 
-    setEntries(prev => [
-      ...prev,
-      { id: Date.now().toString(), title: title, content: content },
-    ]);
-
-    setTitle('');
-    setContent('');
+    try {
+      await createEntry( user.uid, { title, content });
+      setTitle('');
+      setContent('');
+      //setCreatedAt('');
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      } else {
+        navigation.navigate('JournalMain');
+      }
+    } catch (error) {
+      console.error('Error saving entry:', error);
+    }
   };
 
   return (
